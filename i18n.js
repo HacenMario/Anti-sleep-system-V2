@@ -66,7 +66,7 @@
 
   const EN_STATIC = {
     'Anti Sleep System by MADOUNINE HACENE': { ar:'Anti Sleep System by MADOUNINE HACENE', fr:'Anti Sleep System par MADOUNINE HACENE' },
-    'Anti Sleep System • by MADOUNINE Hacene •': { ar:'Anti Sleep System • par MADOUNINE Hacene •', fr:'Anti Sleep System • par MADOUNINE Hacene •' },
+    'Anti Sleep System • MADOUNINE Hacene •': { ar:'Anti Sleep System • MADOUNINE Hacene •', fr:'Anti Sleep System • MADOUNINE Hacene •' },
     'WebRTC + MediaPipe FaceMesh + Canvas API + Web Audio API + AI': { ar:'WebRTC + MediaPipe FaceMesh + Canvas API + Web Audio API + AI', fr:'WebRTC + MediaPipe FaceMesh + Canvas API + Web Audio API + IA' },
     'Driver Monitoring Mode': { ar:'وضع مراقبة السائق', fr:'Mode de surveillance du conducteur' },
     'Driver Mode': { ar:'وضع السائق', fr:'Mode conducteur' },
