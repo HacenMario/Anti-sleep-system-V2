@@ -16,6 +16,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
 const COOKIE_SECURE = process.env.NODE_ENV === 'production';
 const COOKIE_SAMESITE = process.env.COOKIE_SAMESITE || 'lax';
+const APP_VERSION = process.env.APP_VERSION || '2.3-platform';
 
 if (!MONGODB_URI) throw new Error('MONGODB_URI is required');
 if (!JWT_SECRET || JWT_SECRET.length < 32) throw new Error('JWT_SECRET must be at least 32 characters');
@@ -46,6 +47,7 @@ const userSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true, minlength: 2, maxlength: 60 },
   email: { type: String, required: true, unique: true, lowercase: true, trim: true, maxlength: 160 },
   passwordHash: { type: String, required: true, select: false },
+  tokenVersion: { type: Number, default: 0 },
   createdAt: { type: Date, default: Date.now },
   lastLoginAt: { type: Date, default: null },
   settings: {
@@ -57,27 +59,9 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-/*
- * PRIVACY-FIRST SESSION MODEL
- *
- * Stored:
- * - user ownership
- * - session start/end timestamps
- * - duration
- * - alert count
- * - total alert duration
- * - completion state
- *
- * NOT stored:
- * - camera frames/video
- * - face images
- * - MediaPipe landmarks
- * - EAR samples
- * - audio
- * - raw biometric data
- */
 const monitoringSessionSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true, index: true },
+  clientSessionId: { type: String, trim: true, maxlength: 120 },
   startedAt: { type: Date, required: true },
   endedAt: { type: Date, required: true },
   durationSeconds: { type: Number, required: true, min: 1, max: 86400 },
@@ -87,16 +71,12 @@ const monitoringSessionSchema = new mongoose.Schema({
   minEar: { type: Number, min: 0, max: 2, default: null },
   perclos: { type: Number, min: 0, max: 100, default: null },
   riskScore: { type: Number, min: 0, max: 100, default: null },
-  blinkRate: { type: Number, min: 0, max: 300, default: null },
-  microSleepCount: { type: Number, min: 0, max: 10000, default: 0 },
-  confidence: { type: Number, min: 0, max: 100, default: null },
-  avgYaw: { type: Number, min: -90, max: 90, default: null },
-  avgPitch: { type: Number, min: -90, max: 90, default: null },
   completed: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now }
 }, { versionKey: false });
 
 monitoringSessionSchema.index({ userId: 1, endedAt: -1 });
+monitoringSessionSchema.index({ userId: 1, clientSessionId: 1 }, { unique: true, sparse: true });
 const MonitoringSession = mongoose.model('MonitoringSession', monitoringSessionSchema);
 
 function publicUser(user) {
@@ -114,7 +94,7 @@ function publicUser(user) {
 }
 
 function createToken(user) {
-  return jwt.sign({ sub: String(user._id) }, JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign({ sub: String(user._id), tv: Number(user.tokenVersion || 0) }, JWT_SECRET, { expiresIn: '7d' });
 }
 
 function setAuthCookie(res, token) {
@@ -140,12 +120,14 @@ async function requireAuth(req, res, next) {
   try {
     const token = req.cookies.anti_sleep_token;
     if (!token) return res.status(401).json({ message: 'غير مسجل الدخول.' });
-
     const payload = jwt.verify(token, JWT_SECRET);
     const user = await User.findById(payload.sub);
     if (!user) return res.status(401).json({ message: 'الحساب غير موجود.' });
-
+    if (Number(payload.tv ?? 0) !== Number(user.tokenVersion || 0)) {
+      return res.status(401).json({ message: 'جلسة الدخول غير صالحة أو منتهية.' });
+    }
     req.user = user;
+    req.tokenPayload = payload;
     next();
   } catch (_) {
     return res.status(401).json({ message: 'جلسة الدخول غير صالحة أو منتهية.' });
@@ -157,42 +139,30 @@ app.get('/api/health', async (req, res) => {
   res.status(dbReady ? 200 : 503).json({
     ok: dbReady,
     service: 'anti-sleep-backend',
-    database: dbReady ? 'connected' : 'disconnected'
+    database: dbReady ? 'connected' : 'disconnected',
+    version: APP_VERSION,
+    uptimeSeconds: Math.round(process.uptime())
   });
 });
 
 /* ========================= AUTH ========================= */
-
 app.post('/api/auth/register', authLimiter, async (req, res) => {
   try {
     const name = String(req.body.name || '').trim();
     const email = String(req.body.email || '').trim().toLowerCase();
     const password = String(req.body.password || '');
-
-    if (name.length < 2 || name.length > 60) {
-      return res.status(400).json({ message: 'الاسم يجب أن يكون بين 2 و60 حرفًا.' });
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return res.status(400).json({ message: 'البريد الإلكتروني غير صالح.' });
-    }
-    if (password.length < 8 || password.length > 128) {
-      return res.status(400).json({ message: 'كلمة المرور يجب أن تكون بين 8 و128 حرفًا.' });
-    }
-
-    const exists = await User.exists({ email });
-    if (exists) return res.status(409).json({ message: 'هذا البريد الإلكتروني مسجل مسبقًا.' });
-
+    if (name.length < 2 || name.length > 60) return res.status(400).json({ message: 'الاسم يجب أن يكون بين 2 و60 حرفًا.' });
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ message: 'البريد الإلكتروني غير صالح.' });
+    if (password.length < 8 || password.length > 128) return res.status(400).json({ message: 'كلمة المرور يجب أن تكون بين 8 و128 حرفًا.' });
+    if (await User.exists({ email })) return res.status(409).json({ message: 'هذا البريد الإلكتروني مسجل مسبقًا.' });
     const passwordHash = await bcrypt.hash(password, 12);
     const user = await User.create({ name, email, passwordHash });
-
     setAuthCookie(res, createToken(user));
-    return res.status(201).json({ user: publicUser(user) });
+    res.status(201).json({ user: publicUser(user) });
   } catch (err) {
-    if (err && err.code === 11000) {
-      return res.status(409).json({ message: 'هذا البريد الإلكتروني مسجل مسبقًا.' });
-    }
+    if (err?.code === 11000) return res.status(409).json({ message: 'هذا البريد الإلكتروني مسجل مسبقًا.' });
     console.error(err);
-    return res.status(500).json({ message: 'تعذر إنشاء الحساب حاليًا.' });
+    res.status(500).json({ message: 'تعذر إنشاء الحساب حاليًا.' });
   }
 });
 
@@ -200,21 +170,16 @@ app.post('/api/auth/login', authLimiter, async (req, res) => {
   try {
     const email = String(req.body.email || '').trim().toLowerCase();
     const password = String(req.body.password || '');
-
     const user = await User.findOne({ email }).select('+passwordHash');
     if (!user) return res.status(401).json({ message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة.' });
-
-    const valid = await bcrypt.compare(password, user.passwordHash);
-    if (!valid) return res.status(401).json({ message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة.' });
-
+    if (!await bcrypt.compare(password, user.passwordHash)) return res.status(401).json({ message: 'البريد الإلكتروني أو كلمة المرور غير صحيحة.' });
     user.lastLoginAt = new Date();
     await user.save();
-
     setAuthCookie(res, createToken(user));
-    return res.json({ user: publicUser(user) });
+    res.json({ user: publicUser(user) });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ message: 'تعذر تسجيل الدخول حاليًا.' });
+    res.status(500).json({ message: 'تعذر تسجيل الدخول حاليًا.' });
   }
 });
 
@@ -223,13 +188,43 @@ app.post('/api/auth/logout', (req, res) => {
   res.json({ ok: true });
 });
 
-app.get('/api/auth/me', requireAuth, (req, res) => {
-  res.json({ user: publicUser(req.user) });
+app.post('/api/auth/logout-all', requireAuth, async (req, res) => {
+  req.user.tokenVersion = Number(req.user.tokenVersion || 0) + 1;
+  await req.user.save();
+  clearAuthCookie(res);
+  res.json({ ok: true });
 });
 
+app.get('/api/auth/me', requireAuth, (req, res) => res.json({ user: publicUser(req.user) }));
 
+app.get('/api/auth/security', requireAuth, (req, res) => {
+  res.json({
+    userId: String(req.user._id),
+    createdAt: req.user.createdAt,
+    lastLoginAt: req.user.lastLoginAt,
+    sessionMaxAgeSeconds: 7 * 24 * 60 * 60
+  });
+});
 
-/* ========================= PROFILE / SETTINGS ========================= */
+app.post('/api/auth/change-password', authLimiter, requireAuth, async (req, res) => {
+  try {
+    const currentPassword = String(req.body.currentPassword || '');
+    const newPassword = String(req.body.newPassword || '');
+    if (newPassword.length < 8 || newPassword.length > 128) return res.status(400).json({ message: 'كلمة المرور يجب أن تكون بين 8 و128 حرفًا.' });
+    const user = await User.findById(req.user._id).select('+passwordHash');
+    if (!user || !await bcrypt.compare(currentPassword, user.passwordHash)) return res.status(401).json({ message: 'كلمة المرور الحالية غير صحيحة.' });
+    user.passwordHash = await bcrypt.hash(newPassword, 12);
+    user.tokenVersion = Number(user.tokenVersion || 0) + 1;
+    await user.save();
+    setAuthCookie(res, createToken(user));
+    res.json({ ok: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'تعذر تحديث كلمة المرور حاليًا.' });
+  }
+});
+
+/* ========================= SETTINGS ========================= */
 app.get('/api/auth/settings', requireAuth, (req, res) => {
   res.json({ settings: {
     drowsyLimit: req.user.settings?.drowsyLimit ?? 2,
@@ -243,30 +238,25 @@ app.patch('/api/auth/settings', dataLimiter, requireAuth, async (req, res) => {
     const drowsyLimit = Number(req.body.drowsyLimit ?? req.user.settings?.drowsyLimit ?? 2);
     const earThreshold = Number(req.body.earThreshold ?? req.user.settings?.earThreshold ?? 0.12);
     const adaptiveCalibration = req.body.adaptiveCalibration !== false;
-    if (!Number.isFinite(drowsyLimit) || drowsyLimit < 0.5 || drowsyLimit > 4) {
-      return res.status(400).json({ message: 'حد الإنذار يجب أن يكون بين 0.5 و4 ثوانٍ.' });
-    }
-    if (!Number.isFinite(earThreshold) || earThreshold < 0.10 || earThreshold > 0.40) {
-      return res.status(400).json({ message: 'عتبة EAR غير صالحة.' });
-    }
+    if (!Number.isFinite(drowsyLimit) || drowsyLimit < 0.5 || drowsyLimit > 4) return res.status(400).json({ message: 'حد الإنذار يجب أن يكون بين 0.5 و4 ثوانٍ.' });
+    if (!Number.isFinite(earThreshold) || earThreshold < 0.10 || earThreshold > 0.40) return res.status(400).json({ message: 'عتبة EAR غير صالحة.' });
     req.user.settings = { drowsyLimit, earThreshold, adaptiveCalibration };
     await req.user.save();
     res.json({ settings: req.user.settings });
   } catch (err) {
-    console.error('Settings update failed:', err);
+    console.error(err);
     res.status(500).json({ message: 'تعذر حفظ الإعدادات حاليًا.' });
   }
 });
 
-/* ========================= PRIVATE DATA ========================= */
-
-// Save only privacy-safe session statistics.
+/* ========================= PRIVATE SESSION DATA ========================= */
 app.post('/api/data/sessions', dataLimiter, requireAuth, async (req, res) => {
   try {
     const durationSeconds = Math.round(Number(req.body.durationSeconds));
     const alertCount = Math.round(Number(req.body.alertCount));
     const alertSeconds = Number(req.body.alertSeconds);
     const completed = req.body.completed !== false;
+    const clientSessionId = String(req.body.clientSessionId || '').trim().slice(0, 120) || null;
     const optionalNumber = (value, min, max) => {
       if (value === null || value === undefined || value === '') return null;
       const n = Number(value);
@@ -276,30 +266,21 @@ app.post('/api/data/sessions', dataLimiter, requireAuth, async (req, res) => {
     const minEar = optionalNumber(req.body.minEar, 0, 2);
     const perclos = optionalNumber(req.body.perclos, 0, 100);
     const riskScore = optionalNumber(req.body.riskScore, 0, 100);
-    const blinkRate = optionalNumber(req.body.blinkRate, 0, 300);
-    const microSleepCount = optionalNumber(req.body.microSleepCount, 0, 10000);
-    const confidence = optionalNumber(req.body.confidence, 0, 100);
-    const avgYaw = optionalNumber(req.body.yaw, -90, 90);
-    const avgPitch = optionalNumber(req.body.pitch, -90, 90);
+    if (!Number.isFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 86400) return res.status(400).json({ message: 'مدة الجلسة غير صالحة.' });
+    if (!Number.isFinite(alertCount) || alertCount < 0 || alertCount > 10000) return res.status(400).json({ message: 'عدد التنبيهات غير صالح.' });
+    if (!Number.isFinite(alertSeconds) || alertSeconds < 0 || alertSeconds > durationSeconds) return res.status(400).json({ message: 'مدة التنبيه غير صالحة.' });
+    if ([avgEar, minEar, perclos, riskScore].some(Number.isNaN)) return res.status(400).json({ message: 'بيانات التحليل غير صالحة.' });
 
-    if (!Number.isFinite(durationSeconds) || durationSeconds < 1 || durationSeconds > 86400) {
-      return res.status(400).json({ message: 'مدة الجلسة غير صالحة.' });
-    }
-    if (!Number.isFinite(alertCount) || alertCount < 0 || alertCount > 10000) {
-      return res.status(400).json({ message: 'عدد التنبيهات غير صالح.' });
-    }
-    if (!Number.isFinite(alertSeconds) || alertSeconds < 0 || alertSeconds > durationSeconds) {
-      return res.status(400).json({ message: 'مدة التنبيه غير صالحة.' });
-    }
-    if ([avgEar, minEar, perclos, riskScore, blinkRate, microSleepCount, confidence, avgYaw, avgPitch].some(Number.isNaN)) {
-      return res.status(400).json({ message: 'بيانات التحليل غير صالحة.' });
+    if (clientSessionId) {
+      const existing = await MonitoringSession.findOne({ userId: req.user._id, clientSessionId }).lean();
+      if (existing) return res.status(200).json({ ok: true, duplicate: true, session: { id: String(existing._id) } });
     }
 
     const endedAt = new Date();
     const startedAt = new Date(endedAt.getTime() - durationSeconds * 1000);
-
     const session = await MonitoringSession.create({
       userId: req.user._id,
+      clientSessionId,
       startedAt,
       endedAt,
       durationSeconds,
@@ -309,36 +290,16 @@ app.post('/api/data/sessions', dataLimiter, requireAuth, async (req, res) => {
       minEar: minEar === null ? null : Number(minEar.toFixed(4)),
       perclos: perclos === null ? null : Number(perclos.toFixed(1)),
       riskScore: riskScore === null ? null : Math.round(riskScore),
-      blinkRate: blinkRate === null ? null : Number(blinkRate.toFixed(1)),
-      microSleepCount: microSleepCount === null ? 0 : Math.round(microSleepCount),
-      confidence: confidence === null ? null : Number(confidence.toFixed(1)),
-      avgYaw: avgYaw === null ? null : Number(avgYaw.toFixed(1)),
-      avgPitch: avgPitch === null ? null : Number(avgPitch.toFixed(1)),
       completed
     });
-
-    res.status(201).json({
-      ok: true,
-      session: {
-        id: String(session._id),
-        startedAt: session.startedAt,
-        endedAt: session.endedAt,
-        durationSeconds: session.durationSeconds,
-        alertCount: session.alertCount,
-        alertSeconds: session.alertSeconds,
-        avgEar: session.avgEar,
-        minEar: session.minEar,
-        perclos: session.perclos,
-        riskScore: session.riskScore,
-        blinkRate: session.blinkRate,
-        microSleepCount: session.microSleepCount,
-        confidence: session.confidence,
-        avgYaw: session.avgYaw,
-        avgPitch: session.avgPitch,
-        completed: session.completed
-      }
-    });
+    res.status(201).json({ ok: true, session: {
+      id: String(session._id), startedAt: session.startedAt, endedAt: session.endedAt,
+      durationSeconds: session.durationSeconds, alertCount: session.alertCount,
+      alertSeconds: session.alertSeconds, avgEar: session.avgEar, minEar: session.minEar,
+      perclos: session.perclos, riskScore: session.riskScore, completed: session.completed
+    }});
   } catch (err) {
+    if (err?.code === 11000) return res.status(200).json({ ok: true, duplicate: true });
     console.error('Session save failed:', err);
     res.status(500).json({ message: 'تعذر حفظ جلسة المراقبة حاليًا.' });
   }
@@ -349,16 +310,13 @@ app.get('/api/data/sessions', dataLimiter, requireAuth, async (req, res) => {
     let limit = Number.parseInt(req.query.limit, 10);
     if (!Number.isFinite(limit)) limit = 30;
     limit = Math.min(Math.max(limit, 1), 100);
-
     const sessions = await MonitoringSession.find({ userId: req.user._id })
-      .sort({ endedAt: -1 })
-      .limit(limit)
-      .select('startedAt endedAt durationSeconds alertCount alertSeconds avgEar minEar perclos riskScore blinkRate microSleepCount confidence avgYaw avgPitch completed -_id')
+      .sort({ endedAt: -1 }).limit(limit)
+      .select('startedAt endedAt durationSeconds alertCount alertSeconds avgEar minEar perclos riskScore completed -_id')
       .lean();
-
     res.json({ sessions });
   } catch (err) {
-    console.error('Session list failed:', err);
+    console.error(err);
     res.status(500).json({ message: 'تعذر تحميل سجل الجلسات حاليًا.' });
   }
 });
@@ -367,51 +325,38 @@ app.get('/api/data/stats', dataLimiter, requireAuth, async (req, res) => {
   try {
     const [result] = await MonitoringSession.aggregate([
       { $match: { userId: req.user._id } },
-      {
-        $group: {
-          _id: null,
-          sessionCount: { $sum: 1 },
-          totalDurationSeconds: { $sum: '$durationSeconds' },
-          totalAlerts: { $sum: '$alertCount' },
-          totalAlertSeconds: { $sum: '$alertSeconds' }
-        }
-      }
+      { $group: {
+        _id: null,
+        sessionCount: { $sum: 1 },
+        totalDurationSeconds: { $sum: '$durationSeconds' },
+        totalAlerts: { $sum: '$alertCount' },
+        totalAlertSeconds: { $sum: '$alertSeconds' },
+        averageRiskScore: { $avg: '$riskScore' },
+        averagePerclos: { $avg: '$perclos' }
+      }}
     ]);
-
-    if (!result) {
-      return res.json({
-        sessionCount: 0,
-        totalDurationSeconds: 0,
-        totalAlerts: 0,
-        totalAlertSeconds: 0,
-        averageRiskScore: 0,
-        averagePerclos: 0,
-        averageDurationSeconds: 0
-      });
-    }
-
+    if (!result) return res.json({ sessionCount: 0, totalDurationSeconds: 0, totalAlerts: 0, totalAlertSeconds: 0, averageRiskScore: 0, averagePerclos: 0, averageDurationSeconds: 0 });
     res.json({
       sessionCount: result.sessionCount,
       totalDurationSeconds: result.totalDurationSeconds,
       totalAlerts: result.totalAlerts,
       totalAlertSeconds: Number(result.totalAlertSeconds.toFixed(1)),
-      averageDurationSeconds: result.sessionCount
-        ? Math.round(result.totalDurationSeconds / result.sessionCount)
-        : 0
+      averageRiskScore: Number((result.averageRiskScore || 0).toFixed(1)),
+      averagePerclos: Number((result.averagePerclos || 0).toFixed(1)),
+      averageDurationSeconds: result.sessionCount ? Math.round(result.totalDurationSeconds / result.sessionCount) : 0
     });
   } catch (err) {
-    console.error('Stats failed:', err);
+    console.error(err);
     res.status(500).json({ message: 'تعذر تحميل الإحصائيات حاليًا.' });
   }
 });
 
-// Privacy control: delete ONLY the authenticated user's monitoring data.
 app.delete('/api/data/sessions', dataLimiter, requireAuth, async (req, res) => {
   try {
     const result = await MonitoringSession.deleteMany({ userId: req.user._id });
     res.json({ ok: true, deletedCount: result.deletedCount || 0 });
   } catch (err) {
-    console.error('Session deletion failed:', err);
+    console.error(err);
     res.status(500).json({ message: 'تعذر حذف بيانات المراقبة حاليًا.' });
   }
 });
@@ -419,10 +364,5 @@ app.delete('/api/data/sessions', dataLimiter, requireAuth, async (req, res) => {
 app.use((req, res) => res.status(404).json({ message: 'المسار غير موجود.' }));
 
 mongoose.connect(MONGODB_URI)
-  .then(() => {
-    app.listen(PORT, () => console.log(`Anti-Sleep backend listening on port ${PORT}`));
-  })
-  .catch(err => {
-    console.error('MongoDB connection failed:', err);
-    process.exit(1);
-  });
+  .then(() => app.listen(PORT, () => console.log(`Anti-Sleep backend listening on port ${PORT} (${APP_VERSION})`)))
+  .catch(err => { console.error('MongoDB connection failed:', err); process.exit(1); });
