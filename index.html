@@ -4,6 +4,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon.png">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#080c18" />
+    <meta name="description" content="Anti Sleep System — privacy-first browser driver drowsiness monitoring with local AI analysis." />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="favicon.png" />
     <title>Anti Sleep System by MADOUNINE HACENE</title>
     <style>
         /* ====== RESET & GLOBAL ====== */
@@ -1342,16 +1346,6 @@
         @media(max-width:600px){.auth-user-area{width:100%;justify-content:flex-end}.auth-btn{flex:1}.auth-user-badge{flex:1;justify-content:center}.auth-card{padding:18px}}
 
 
-
-        /* ====== LANGUAGE SWITCHER ====== */
-        .language-switcher{display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--border-color);background:rgba(26,35,50,.78);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.18);direction:ltr!important;flex-shrink:0}
-        .language-switcher .language-icon{font-size:16px;padding:0 4px;line-height:1}
-        .language-switcher button{appearance:none;border:0;background:transparent;color:var(--text-secondary);font:700 11px/1 var(--font);min-width:34px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer;transition:all .2s ease}
-        .language-switcher button:hover{color:var(--text-primary);background:rgba(255,255,255,.07)}
-        .language-switcher button.active{color:#fff;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));box-shadow:0 4px 14px rgba(59,130,246,.28)}
-        .language-switcher button:focus-visible{outline:2px solid var(--accent-cyan);outline-offset:2px}
-        @media(max-width:700px){.language-switcher{order:-1}.language-switcher button{min-width:30px;height:28px;padding:0 6px}.language-switcher .language-icon{display:none}}
-
 /* Arabic RTL presentation layer — no JavaScript/detection changes */
 html{direction:rtl}
 body{direction:rtl;text-align:right}
@@ -1420,20 +1414,53 @@ input[type="range"]{direction:ltr}
             50%{box-shadow:0 20px 70px rgba(0,0,0,.58),0 0 58px rgba(239,68,68,.42)}
         }
         @media (max-width:600px){ .drowsiness-warning-card{padding:25px 18px 23px;border-radius:18px} }
-</style>
-<style>
-.drowsiness-engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.risk-score-wrap{display:flex;align-items:center;gap:14px}.risk-ring{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;position:relative;flex:none;background:conic-gradient(var(--accent-green) 0deg,rgba(148,163,200,.12) 0deg)}.risk-ring:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#0c1322}.risk-ring strong{position:relative;z-index:1;font-size:1.25rem}.risk-meta strong{display:block;font-size:.95rem}.risk-meta span{display:block;margin-top:4px;color:var(--text-secondary);font-size:.66rem}.risk-level{display:inline-flex;margin-top:8px;padding:5px 9px;border-radius:999px;font-size:.62rem;font-weight:900;border:1px solid var(--line-soft)}.risk-level.safe{color:#a7f3d0;background:rgba(52,211,153,.07)}.risk-level.low{color:#bfdbfe;background:rgba(59,130,246,.07)}.risk-level.moderate{color:#fde68a;background:rgba(245,158,11,.07)}.risk-level.high,.risk-level.critical{color:#fecaca;background:rgba(244,63,94,.08)}.engine-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.engine-metric{padding:9px;border-radius:10px;background:rgba(8,12,24,.32);border:1px solid rgba(148,163,200,.07)}.engine-metric small{display:block;color:var(--text-secondary);font-size:.54rem}.engine-metric b{display:block;margin-top:3px;font-size:.82rem;font-variant-numeric:tabular-nums}.confidence-bar{height:5px;border-radius:999px;background:rgba(148,163,200,.1);overflow:hidden;margin-top:8px}.confidence-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-blue),var(--accent-cyan));transition:width .25s}.evidence-list{display:grid;gap:7px}.evidence-row{display:flex;justify-content:space-between;padding:8px 9px;border-radius:10px;background:rgba(8,12,24,.3);font-size:.63rem}.evidence-row span{color:var(--text-secondary)}.engine-state{margin-top:9px;padding:8px 10px;border-radius:10px;border:1px solid rgba(96,165,250,.13);background:rgba(59,130,246,.045);color:var(--text-secondary);font-size:.62rem;line-height:1.5}@media(max-width:760px){.drowsiness-engine-grid{grid-template-columns:1fr}.engine-metrics{grid-template-columns:repeat(2,1fr)}}
 
-/* ====== LANGUAGE DIRECTION OVERRIDES ====== */
-html[dir="ltr"]{direction:ltr}
-html[dir="ltr"] body{direction:ltr;text-align:left}
-html[dir="ltr"] .header,html[dir="ltr"] .sub,html[dir="ltr"] .top-tools,html[dir="ltr"] .driver-mode-header,html[dir="ltr"] .pro-card-header,html[dir="ltr"] .session-bar,html[dir="ltr"] .quick-guide,html[dir="ltr"] .stats-footer{direction:ltr}
-html[dir="ltr"] .header-left,html[dir="ltr"] .live-indicator,html[dir="ltr"] .tool-actions,html[dir="ltr"] .feature-card,html[dir="ltr"] .status-item,html[dir="ltr"] .settings-row,html[dir="ltr"] .settings-row label,html[dir="ltr"] .driver-mode-title,html[dir="ltr"] .driver-mode-toggle,html[dir="ltr"] .quality-row,html[dir="ltr"] .system-status,html[dir="ltr"] .alert-center,html[dir="ltr"] .session-actions,html[dir="ltr"] .account-data-actions,html[dir="ltr"] .auth-user-area,html[dir="ltr"] .auth-card-header{direction:ltr}
-html[dir="ltr"] .quick-guide-text,html[dir="ltr"] .privacy-panel,html[dir="ltr"] .account-data-note,html[dir="ltr"] .auth-message,html[dir="ltr"] .auth-privacy{ text-align:left}
-html[dir="ltr"] .history-item,html[dir="ltr"] .auth-card,html[dir="ltr"] .auth-field{text-align:left}
-html[dir="ltr"] .auth-field input,html[dir="ltr"] .auth-field input::placeholder{text-align:left}
-html[dir="ltr"] .auth-modal{direction:ltr}
-</style></head>
+        /* ============================================================
+           V2 PROFESSIONAL DRIVER SAFETY ENGINE UI
+           ============================================================ */
+        .risk-card{position:relative;overflow:hidden;margin-top:12px;border:1px solid rgba(96,165,250,.18);border-radius:16px;background:linear-gradient(145deg,rgba(17,24,39,.94),rgba(8,12,24,.78));padding:14px}
+        .risk-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 15% 10%,rgba(34,211,238,.08),transparent 34%),radial-gradient(circle at 90% 90%,rgba(59,130,246,.07),transparent 38%);pointer-events:none}
+        .risk-header{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+        .risk-title{font-size:.86rem;font-weight:900}.risk-sub{font-size:.62rem;color:var(--text-secondary);margin-top:3px}
+        .risk-state{padding:5px 9px;border-radius:999px;border:1px solid var(--line-soft);font-size:.62rem;font-weight:900;white-space:nowrap}
+        .risk-state.safe{color:#a7f3d0;background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.2)}
+        .risk-state.low{color:#bae6fd;background:rgba(34,211,238,.08);border-color:rgba(34,211,238,.2)}
+        .risk-state.moderate{color:#fde68a;background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.2)}
+        .risk-state.high,.risk-state.critical{color:#fecdd3;background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.24)}
+        .risk-main{position:relative;display:grid;grid-template-columns:130px 1fr;gap:14px;align-items:center}
+        .risk-ring{width:116px;height:116px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent-green) 0deg,rgba(148,163,200,.1) 0deg);position:relative}
+        .risk-ring::after{content:"";position:absolute;inset:9px;border-radius:50%;background:#0b1120;border:1px solid rgba(148,163,200,.08)}
+        .risk-ring strong{position:relative;z-index:1;font-size:1.55rem;font-variant-numeric:tabular-nums}
+        .risk-ring small{position:absolute;z-index:2;transform:translateY(28px);font-size:.5rem;color:var(--text-secondary);font-weight:800}
+        .risk-factors{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+        .risk-factor{padding:8px;border-radius:10px;background:rgba(8,12,24,.38);border:1px solid rgba(148,163,200,.07)}
+        .risk-factor span{display:block;font-size:.55rem;color:var(--text-secondary)}.risk-factor strong{display:block;margin-top:4px;font-size:.78rem;font-variant-numeric:tabular-nums}
+        .risk-progress{height:7px;border-radius:99px;background:rgba(148,163,200,.1);overflow:hidden;margin-top:11px}.risk-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-green),var(--accent-cyan),var(--accent-rose));transition:width .25s ease}
+        .calibration-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:.6rem;color:var(--text-secondary)}
+        .calibration-btn{border:1px solid rgba(96,165,250,.2);background:rgba(59,130,246,.08);color:var(--text-primary);border-radius:9px;padding:6px 9px;font:inherit;font-weight:800;cursor:pointer}.calibration-btn:hover{background:rgba(59,130,246,.14)}
+        .calibration-status{font-weight:800;color:#a7f3d0}
+        .telemetry-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}
+        .telemetry-item{padding:8px;border-radius:10px;background:rgba(8,12,24,.34);border:1px solid rgba(148,163,200,.07)}
+        .telemetry-item small{display:block;color:var(--text-secondary);font-size:.52rem}.telemetry-item strong{display:block;margin-top:3px;font-size:.72rem}
+        .privacy-note{font-size:.56rem;color:var(--text-secondary);margin-top:9px;line-height:1.5}
+        .alarm-level-2 #alarmWarning{animation:alarmPulseHard .42s ease-in-out infinite alternate}
+        .alarm-level-3 #alarmWarning{animation:alarmPulseCritical .24s ease-in-out infinite alternate}
+        @keyframes alarmPulseHard{from{filter:brightness(1)}to{filter:brightness(1.25);transform:scale(1.01)}}
+        @keyframes alarmPulseCritical{from{filter:brightness(1)}to{filter:brightness(1.45);transform:scale(1.02)}}
+        .calibration-active .video-wrapper{box-shadow:0 0 0 2px rgba(34,211,238,.22),0 0 45px rgba(34,211,238,.13)}
+        @media(max-width:760px){.risk-main{grid-template-columns:1fr}.risk-ring{margin:auto}.risk-factors{grid-template-columns:repeat(2,1fr)}.telemetry-grid{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:420px){.risk-factors{grid-template-columns:1fr 1fr}.telemetry-grid{grid-template-columns:1fr 1fr}.risk-card{padding:11px}}
+
+    
+        /* ====== PLATFORM ENHANCEMENT LAYER ====== */
+        .language-switcher{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line-soft);background:rgba(26,35,50,.68);border-radius:10px}
+        .language-switcher .language-icon{font-size:.8rem;padding:0 3px}
+        .language-switcher button{border:0;background:transparent;color:var(--text-secondary);border-radius:7px;padding:5px 7px;cursor:pointer;font-size:.65rem;font-weight:900}
+        .language-switcher button.active{background:rgba(59,130,246,.18);color:var(--text-primary);box-shadow:inset 0 0 0 1px rgba(96,165,250,.16)}
+        .language-switcher button:hover{color:var(--text-primary)}
+        @media(max-width:760px){.language-switcher{order:5}.tool-actions{flex-wrap:wrap}}
+</style>
+</head>
 <body>
 
     <div class="app">
@@ -1609,13 +1636,43 @@ html[dir="ltr"] .auth-modal{direction:ltr}
             </label>
         </div>
 
-        <div class="drowsiness-engine-grid" id="advancedDrowsinessEngine">
-<section class="pro-card risk-card"><div class="pro-card-header"><div class="pro-card-title">🧠 Drowsiness Risk Engine</div><div class="pro-card-sub">Temporal analysis</div></div>
-<div class="risk-score-wrap"><div class="risk-ring" id="riskRing"><strong id="riskScore">0</strong></div><div class="risk-meta"><strong id="riskLabel">SAFE</strong><span id="riskConfidenceText">Confidence: 0%</span><div class="risk-level safe" id="riskLevel">SAFE</div></div></div>
-<div class="confidence-bar"><i id="riskConfidenceBar"></i></div><div class="engine-metrics">
-<div class="engine-metric"><small>PERCLOS</small><b id="perclosValue">0%</b></div><div class="engine-metric"><small>BLINK RATE</small><b id="blinkRateValue">0/min</b></div><div class="engine-metric"><small>MICRO-SLEEP</small><b id="microSleepValue">0</b></div><div class="engine-metric"><small>CLOSURE</small><b id="closureValue">0.0s</b></div><div class="engine-metric"><small>YAW</small><b id="yawValue">0°</b></div><div class="engine-metric"><small>PITCH</small><b id="pitchValue">0°</b></div></div><div class="engine-state" id="engineState">Waiting for monitoring data.</div></section>
-<section class="pro-card"><div class="pro-card-header"><div class="pro-card-title">🛡️ False-Alarm Protection</div><div class="pro-card-sub">Evidence</div></div>
-<div class="evidence-list"><div class="evidence-row"><span>EAR evidence</span><b id="evidenceEar">0%</b></div><div class="evidence-row"><span>PERCLOS evidence</span><b id="evidencePerclos">0%</b></div><div class="evidence-row"><span>Closure evidence</span><b id="evidenceClosure">0%</b></div><div class="evidence-row"><span>Head-pose evidence</span><b id="evidencePose">0%</b></div><div class="evidence-row"><span>Face quality</span><b id="evidenceFace">0%</b></div><div class="evidence-row"><span>Temporal stability</span><b id="evidenceTemporal">0%</b></div></div><div class="engine-state" id="alarmDecisionState">🛡️ Waiting for sustained evidence</div></section></div>
+
+        <!-- ====== V2 DRIVER SAFETY ENGINE ====== -->
+        <section class="risk-card" id="riskCard" aria-live="polite">
+            <div class="risk-header">
+                <div>
+                    <div class="risk-title">🧠 تقييم خطر النعاس</div>
+                    <div class="risk-sub">تحليل محلي يجمع EAR + PERCLOS + مدة الإغلاق + وضعية الرأس</div>
+                </div>
+                <span class="risk-state safe" id="riskState">SAFE</span>
+            </div>
+            <div class="risk-main">
+                <div class="risk-ring" id="riskRing"><strong id="riskScore">0</strong><small>/ 100</small></div>
+                <div>
+                    <div class="risk-factors">
+                        <div class="risk-factor"><span>EAR</span><strong id="riskEar">--</strong></div>
+                        <div class="risk-factor"><span>PERCLOS</span><strong id="riskPerclos">0%</strong></div>
+                        <div class="risk-factor"><span>إغلاق طويل</span><strong id="riskClosure">0.0ث</strong></div>
+                        <div class="risk-factor"><span>الرأس</span><strong id="riskHead">مستقيم</strong></div>
+                        <div class="risk-factor"><span>Yaw</span><strong id="riskYaw">0°</strong></div>
+                        <div class="risk-factor"><span>Pitch</span><strong id="riskPitch">0°</strong></div>
+                    </div>
+                    <div class="risk-progress"><i id="riskProgress"></i></div>
+                    <div class="calibration-row">
+                        <button class="calibration-btn" id="calibrateBtn" type="button">🎯 معايرة تلقائية</button>
+                        <span id="calibrationStatus" class="calibration-status">المعايرة الافتراضية</span>
+                        <span id="adaptiveThresholdLabel">عتبة تكيفية: --</span>
+                    </div>
+                </div>
+            </div>
+            <div class="telemetry-grid">
+                <div class="telemetry-item"><small>العين اليمنى</small><strong id="leftEarValue">--</strong></div>
+                <div class="telemetry-item"><small>العين اليسرى</small><strong id="rightEarValue">--</strong></div>
+                <div class="telemetry-item"><small>الرمشات</small><strong id="blinkRateValue">0 / دقيقة</strong></div>
+                <div class="telemetry-item"><small>جودة الوجه</small><strong id="faceQualityValue">--</strong></div>
+            </div>
+            <div class="privacy-note">🔒 لا يتم إرسال الفيديو أو صور الوجه أو landmarks أو عينات EAR الخام إلى الخادم. يتم إرسال ملخصات الجلسة فقط عند تسجيل المستخدم.</div>
+        </section>
 
         <!-- ====== STATS FOOTER ====== -->
         <div class="stats-footer">
@@ -1763,327 +1820,590 @@ html[dir="ltr"] .auth-modal{direction:ltr}
     </script>
 
     <script>
-(function(){
-'use strict';
-const $=id=>document.getElementById(id), video=$('video'),canvas=$('output'),ctx=canvas.getContext('2d');
-const eye=$('eyeState'),timer=$('timerDisplay'),distEl=$('distanceDisplay'),earEl=$('earDisplay'),alarm=$('alarmWarning'),alarmDur=$('alarmDurationDisplay'),panel=$('statusPanel'),countdown=$('alarmCountdown');
-const start=$('startBtn'),stop=$('stopBtn'),mute=$('muteBtn'),thr=$('thresholdSlider'),thrV=$('thresholdValue'),earThr=$('earThresholdSlider'),earThrV=$('earThresholdValue'),reset=$('resetStatsBtn'),dot=$('statusDot'),status=$('statusLabel');
-const cfg={CAL:8000,WINDOW:60000,SAMPLE:100,CONFIRM:900,RECOVER:850,MICRO_MIN:.30,MICRO_MAX:2.0,MAX_GAP:700,CLOSE_CONFIRM_FRAMES:3,OPEN_CONFIRM_FRAMES:2,OPEN_MARGIN:.018,EYE_INVALID_RESET:500};
-let DROWSY_LIMIT=2,EAR_THRESHOLD=.12,isRunning=false,isClosed=false,camera=null,mesh=null,audio=null,osc=null,gain=null,muted=false;
-let closeStart=0,lastFrame=0,candidate=0,recovery=0,alarmOn=false,alarmLevel=0,totalMicro=0,faceQuality=0,risk=0,confidence=0,cal={on:false,start:0,values:[]},samples=[],blinks=[],pose={yaw:0,pitch:0};
-let closeStreak=0,openStreak=0,eyeInvalidSince=0,lastValidEye=0;
-let stats={totalBlinks:0,closedEvents:0,alarmEvents:0,durations:[],maxDuration:0,currentAlarmStart:null};
-const n=v=>Number.isFinite(v)?v:0, clamp=(v,a,b)=>Math.min(b,Math.max(a,v)), now=()=>performance.now();
-function set(id,v){const e=$(id);if(e)e.textContent=v}
-function d(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
-function ear(lm,a){try{const w=d(lm[a[0]],lm[a[1]]);return w?(d(lm[a[2]],lm[a[3]])+d(lm[a[4]],lm[a[5]]))/(2*w):null}catch(_){return null}}
-function eyes(lm){const r=ear(lm,[33,133,159,145,160,144]),l=ear(lm,[362,263,386,374,385,380]);const a=[r,l].filter(Number.isFinite);return{right:r,left:l,average:a.length?a.reduce((x,y)=>x+y,0)/a.length:null}}
-function head(lm){try{const no=lm[1],ch=lm[152],l=lm[234],r=lm[454],f=lm[10],w=Math.max(.001,d(l,r)),h=Math.max(.001,d(f,ch));return{yaw:clamp((no.x-(l.x+r.x)/2)/w*70,-45,45),pitch:clamp((no.y-(f.y+ch.y)/2)/h*90,-45,45)}}catch(_){return{yaw:0,pitch:0}}}
-function quality(lm){try{const c=lm[1],l=lm[234],r=lm[454];return Math.round(clamp((1-Math.abs(c.x-.5)*2.2)*55+clamp(d(l,r)/.42,0,1)*45,0,100))}catch(_){return 0}}
-function perclos(t){const a=samples.filter(s=>t-s.t<=cfg.WINDOW);return a.length?a.filter(s=>s.closed).length/a.length*100:0}
-function blinkRate(t){return blinks.filter(x=>t-x<=60000).length}
-function add(earVal,closed,t){if(!Number.isFinite(earVal))return;samples.push({t,ear:earVal,closed});while(samples.length&&t-samples[0].t>cfg.WINDOW)samples.shift();if(samples.length>900)samples.shift();while(blinks.length&&t-blinks[0]>60000)blinks.shift()}
-function updateStats(){set('totalBlinks',stats.totalBlinks);set('closedCount',stats.closedEvents);set('alarmCount',stats.alarmEvents);const a=stats.durations.length?stats.durations.reduce((x,y)=>x+y,0)/stats.durations.length:0;set('avgDuration',a.toFixed(1));set('avgDurationFooter',a.toFixed(1));set('maxDuration',stats.maxDuration.toFixed(1))}
-function resetStats(){stats={totalBlinks:0,closedEvents:0,alarmEvents:0,durations:[],maxDuration:0,currentAlarmStart:null};updateStats()}
-function play(level){if(muted)return;try{if(!audio)audio=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();if(!osc){osc=audio.createOscillator();gain=audio.createGain();osc.type='square';osc.connect(gain);gain.connect(audio.destination);osc.start();if(!stats.currentAlarmStart)stats.currentAlarmStart=now()}osc.frequency.value=level>=3?1320:level===2?1040:880;gain.gain.value=level>=3?.8:level===2?.55:.38;alarm.classList.add('show');panel.classList.add('alarm-active');eye.textContent='🔴 إنذار!';eye.className='status-value alarm'}catch(e){console.warn(e)}}
-function halt(){if(osc){try{osc.stop();osc.disconnect()}catch(_){}osc=null;gain=null}alarm.classList.remove('show');panel.classList.remove('alarm-active');if(stats.currentAlarmStart){stats.alarmEvents++;stats.currentAlarmStart=null;updateStats()}}
-function calibrate(v,t){if(!cal.on)return;if(t-cal.start<cfg.CAL){if(Number.isFinite(v)&&v>.16)cal.values.push(v);set('engineState','🎯 Calibration • '+Math.ceil((cfg.CAL-(t-cal.start))/1000)+'s');return}cal.on=false;if(cal.values.length>=12){const a=[...cal.values].sort((x,y)=>x-y),q=Math.floor(a.length*.1),b=a.slice(q,a.length-q||a.length),base=b.reduce((x,y)=>x+y,0)/b.length;EAR_THRESHOLD=clamp(base*.55,.10,.30);earThr.value=EAR_THRESHOLD;earThrV.textContent=EAR_THRESHOLD.toFixed(2);set('engineState','Calibration complete • threshold '+EAR_THRESHOLD.toFixed(2))}else set('engineState','Calibration skipped • insufficient samples')}
-function riskCalc(v,p,t,c,h){const e=clamp((EAR_THRESHOLD-v)/Math.max(.025,EAR_THRESHOLD-.05)*100,0,100),pe=clamp((p-8)/32*100,0,100),ce=clamp((c*1000-350)/Math.max(300,DROWSY_LIMIT*1000-350)*100,0,100),po=clamp((Math.abs(h.pitch)-12)/20*100,0,100),te=clamp(samples.length/40*100,0,100);let s=e*.30+pe*.25+ce*.20+po*.08+faceQuality*.02+te*.15;if(c>=DROWSY_LIMIT)s+=15;if(p>=30)s+=10;if(blinkRate(t)<3&&p>18)s+=5;return{score:clamp(s,0,100),conf:clamp(samples.length/120*.55+faceQuality/100*.25+te/100*.2,0,1)*100,e,pe,ce,po,te}}
-function riskLabel(v){return v>=80?['CRITICAL','critical']:v>=60?['HIGH','high']:v>=40?['MODERATE','moderate']:v>=20?['LOW','low']:['SAFE','safe']}
-function updateRisk(r,p,c,h,t){const recovering=!isClosed&&r.score<55;risk=(recovering?risk*.62+r.score*.38:risk*.82+r.score*.18);confidence=confidence*.82+r.conf*.18;const [lab,cl]=riskLabel(risk),lvl=$('riskLevel');set('riskScore',Math.round(risk));set('riskLabel',lab);set('riskConfidenceText','Confidence: '+Math.round(confidence)+'%');if(lvl){lvl.textContent=lab;lvl.className='risk-level '+cl}const ring=$('riskRing');if(ring)ring.style.background=`conic-gradient(var(--accent-${risk>=60?'rose':risk>=40?'amber':'green'}) ${risk*3.6}deg,rgba(148,163,200,.12) ${risk*3.6}deg)`;if($('riskConfidenceBar'))$('riskConfidenceBar').style.width=confidence+'%';set('perclosValue',p.toFixed(1)+'%');set('blinkRateValue',blinkRate(t)+'/min');set('microSleepValue',totalMicro);set('closureValue',c.toFixed(1)+'s');set('yawValue',h.yaw.toFixed(1)+'°');set('pitchValue',h.pitch.toFixed(1)+'°');set('evidenceEar',Math.round(r.e)+'%');set('evidencePerclos',Math.round(r.pe)+'%');set('evidenceClosure',Math.round(r.ce)+'%');set('evidencePose',Math.round(r.po)+'%');set('evidenceFace',Math.round(faceQuality)+'%');set('evidenceTemporal',Math.round(r.te)+'%')}
-function decide(r,c,t){const severe=(r.score>=68&&r.conf>=45)||c>=DROWSY_LIMIT;if(!alarmOn){if(severe){if(!candidate)candidate=t;if(t-candidate>=cfg.CONFIRM){alarmOn=true;alarmLevel=r.score>=82||c>=DROWSY_LIMIT*1.5?3:r.score>=72?2:1}}else candidate=0}else{if(r.score<45&&c<.35){if(!recovery)recovery=t;if(t-recovery>=cfg.RECOVER){alarmOn=false;recovery=0;candidate=0}}else recovery=0}if(alarmOn)play(alarmLevel);else halt();set('alarmDecisionState',alarmOn?'⚠️ Alarm confirmed • level '+alarmLevel:'🛡️ Waiting for sustained evidence')}
-function finishClosure(t){if(!isClosed||!closeStart)return;const x=(t-closeStart)/1000;if(x>.12){stats.durations.push(x);stats.maxDuration=Math.max(stats.maxDuration,x);if(x>=cfg.MICRO_MIN&&x<=cfg.MICRO_MAX)totalMicro++;updateStats()}closeStart=0}
-function results(res){const t=now();if(lastFrame&&t-lastFrame>cfg.MAX_GAP){samples=[];risk=0;confidence=0;alarmOn=false;candidate=0;recovery=0;closeStreak=0;openStreak=0;eyeInvalidSince=0;halt()}lastFrame=t;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(video,0,0,canvas.width,canvas.height);if(!res.multiFaceLandmarks?.length){finishClosure(t);isClosed=false;closeStreak=0;openStreak=0;eyeInvalidSince=0;alarmOn=false;candidate=0;recovery=0;halt();faceQuality=0;risk*=.55;confidence*=.65;set('engineState','No face detected • confidence reduced');return}const lm=res.multiFaceLandmarks[0];try{drawConnectors(ctx,lm,FACEMESH_TESSELATION,{color:'#C0C0C080',lineWidth:1});drawConnectors(ctx,lm,FACEMESH_CONTOURS,{color:'#00FFAA',lineWidth:1.5})}catch(_){}const e=eyes(lm),v=e.average,h=head(lm);pose={yaw:h.yaw,pitch:h.pitch};faceQuality=quality(lm);const dt=lm[159]&&lm[145]?Math.abs(lm[159].y-lm[145].y):null;distEl.textContent=Number.isFinite(dt)?dt.toFixed(4):'--';earEl.textContent=Number.isFinite(v)?v.toFixed(3):'--';calibrate(v,t);
+        (function() {
+            'use strict';
 
-// Robust eye-state machine: only valid EAR measurements can change the eye state.
-// A single blink frame cannot lock the system in CLOSED state.
-const eyeValid=Number.isFinite(v)&&v>=.08&&faceQuality>=30;
-if(eyeValid){
-  lastValidEye=t;
-  eyeInvalidSince=0;
-  const rawClosed=v<EAR_THRESHOLD;
-  if(isClosed){
-    if(v>=EAR_THRESHOLD+cfg.OPEN_MARGIN){openStreak++;closeStreak=0;}
-    else {openStreak=0;}
-    if(openStreak>=cfg.OPEN_CONFIRM_FRAMES){
-      finishClosure(t);
-      isClosed=false;
-      openStreak=0;
-      closeStreak=0;
-      candidate=0;
-      recovery=0;
-    }
-  }else{
-    if(rawClosed){closeStreak++;openStreak=0;}
-    else {closeStreak=0;openStreak=0;}
-    if(closeStreak>=cfg.CLOSE_CONFIRM_FRAMES){
-      isClosed=true;
-      closeStart=t-(cfg.CLOSE_CONFIRM_FRAMES-1)*cfg.SAMPLE;
-      stats.closedEvents++;
-      stats.totalBlinks++;
-      blinks.push(t);
-      closeStreak=0;
-    }
-  }
-}else{
-  if(!eyeInvalidSince)eyeInvalidSince=t;
-  closeStreak=0;
-  openStreak=0;
-  // Temporary landmark loss is UNKNOWN, never CLOSED. After a short timeout
-  // we safely end the closure and suppress the alarm instead of latching it.
-  if(t-eyeInvalidSince>=cfg.EYE_INVALID_RESET){
-    if(isClosed)finishClosure(t);
-    isClosed=false;
-    candidate=0;
-    recovery=0;
-    alarmOn=false;
-    halt();
-  }
-}
+            // ============================================================
+            //  DOM ELEMENTS
+            // ============================================================
+            const video = document.getElementById('video');
+            const canvas = document.getElementById('output');
+            const ctx = canvas.getContext('2d');
 
-const closedForSample=isClosed;
-const c=isClosed?(t-closeStart)/1000:0;
-add(v,closedForSample,t);
-const p=perclos(t),r=riskCalc(Number.isFinite(v)?v:EAR_THRESHOLD,p,t,c,h);
-updateRisk(r,p,c,h,t);
-decide(r,c,t);
-if(isClosed){timer.textContent=c.toFixed(1)+' ث';eye.textContent='😴 مغلقة';eye.className='status-value closed';alarmDur.textContent=alarmOn?c.toFixed(1)+'ث':'';countdown.textContent=Math.max(0,DROWSY_LIMIT-c).toFixed(1)+' ث'}else{timer.textContent='0.0 ث';eye.textContent=eyeValid?'👁️ مفتوحة':'👁️ غير مؤكدة';eye.className='status-value';alarmDur.textContent='';countdown.textContent='--'}if(isRunning){dot.className='dot';status.textContent='تشغيل'}}
-function resetState(){finishClosure(now());isClosed=false;halt();samples=[];risk=0;confidence=0;alarmOn=false;candidate=0;recovery=0;closeStreak=0;openStreak=0;eyeInvalidSince=0;lastValidEye=0;set('riskScore','0');set('riskConfidenceText','Confidence: 0%');set('engineState','Waiting for monitoring data.')}
-function init(){mesh=new FaceMesh({locateFile:f=>`https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${f}`});mesh.setOptions({maxNumFaces:1,refineLandmarks:true,minDetectionConfidence:.55,minTrackingConfidence:.55});mesh.onResults(results)}
-async function startCamera(){if(camera)await stopCamera();canvas.width=640;canvas.height=480;try{camera=new Camera(video,{onFrame:async()=>{if(mesh)await mesh.send({image:video})},width:640,height:480,facingMode:'user'});await camera.start();isRunning=true;start.disabled=true;stop.disabled=false;dot.className='dot';status.textContent='تشغيل';cal={on:true,start:now(),values:[]};set('engineState','🎯 Calibration started • keep eyes naturally open');if(!audio)audio=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume()}catch(e){console.error(e);alert('تعذر الوصول إلى الكاميرا. تأكد من منح الإذن.');isRunning=false;start.disabled=false;stop.disabled=true;dot.className='dot inactive';status.textContent='غير نشط'}}
-async function stopCamera(){if(camera){try{await camera.stop()}catch(_){}camera=null}resetState();video.srcObject=null;isRunning=false;start.disabled=false;stop.disabled=true;dot.className='dot inactive';status.textContent='غير نشط';ctx.clearRect(0,0,canvas.width,canvas.height)}
-start.addEventListener('click',()=>{if(!audio)audio=new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();startCamera()});stop.addEventListener('click',stopCamera);mute.addEventListener('click',()=>{muted=!muted;mute.textContent=muted?'🔇 مكتوم':'🔊 غير مكتوم';if(muted)halt()});thr.addEventListener('input',function(){DROWSY_LIMIT=parseFloat(this.value);thrV.textContent=DROWSY_LIMIT.toFixed(1)});earThr.addEventListener('input',function(){EAR_THRESHOLD=parseFloat(this.value);earThrV.textContent=EAR_THRESHOLD.toFixed(2);cal.on=false});reset.addEventListener('click',resetStats);
-window.__antiSleepEngineSnapshot=()=>({riskScore:Math.round(risk),riskConfidence:Math.round(confidence),perclos:Number(perclos(now()).toFixed(1)),blinkRate:blinkRate(now()),microSleepCount:totalMicro,yaw:Number(pose.yaw.toFixed(1)),pitch:Number(pose.pitch.toFixed(1))});
-window.addEventListener('beforeunload',()=>{try{camera?.stop()}catch(_){}try{osc?.stop()}catch(_){}try{audio?.close()}catch(_){}});
-init();resetStats();dot.className='dot inactive';status.textContent='غير نشط';
-})();
-</script>
+            const eyeStateEl = document.getElementById('eyeState');
+            const timerDisplay = document.getElementById('timerDisplay');
+            const distanceDisplay = document.getElementById('distanceDisplay');
+            const earDisplay = document.getElementById('earDisplay');
+            const alarmWarning = document.getElementById('alarmWarning');
+            const alarmDurationDisplay = document.getElementById('alarmDurationDisplay');
+            const statusPanel = document.getElementById('statusPanel');
+            const alarmCountdown = document.getElementById('alarmCountdown');
+
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const thresholdSlider = document.getElementById('thresholdSlider');
+            const thresholdValue = document.getElementById('thresholdValue');
+            const earThresholdSlider = document.getElementById('earThresholdSlider');
+            const earThresholdValue = document.getElementById('earThresholdValue');
+            const resetStatsBtn = document.getElementById('resetStatsBtn');
+
+            const statusDot = document.getElementById('statusDot');
+            const statusLabel = document.getElementById('statusLabel');
+
+            // Stats
+            const totalBlinksEl = document.getElementById('totalBlinks');
+            const avgDurationEl = document.getElementById('avgDuration');
+            const alarmCountEl = document.getElementById('alarmCount');
+            const closedCountEl = document.getElementById('closedCount');
+            const maxDurationEl = document.getElementById('maxDuration');
+            const avgDurationFooterEl = document.getElementById('avgDurationFooter');
+
+            // UI enhancement elements (do not affect detection algorithm)
+            const compactBtn = document.getElementById('compactBtn');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const toast = document.getElementById('toast');
+            const uiModeLabel = document.getElementById('uiModeLabel');
+
+
+            // ============================================================
+            //  UI UTILITIES
+            //  Visual helpers only; detection/state logic is unchanged.
+            // ============================================================
+            let toastTimer = null;
+
+            function showToast(message) {
+                if (!toast) return;
+                toast.textContent = message;
+                toast.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+            }
+
+            function setFullscreen() {
+                const app = document.querySelector('.app');
+                if (!document.fullscreenElement) {
+                    const request = app && app.requestFullscreen ? app.requestFullscreen() : null;
+                    if (request && typeof request.catch === 'function') request.catch(() => {});
+                } else if (document.exitFullscreen) {
+                    document.exitFullscreen().catch(() => {});
+                }
+            }
+
+            function syncFullscreenUI() {
+                const active = !!document.fullscreenElement;
+                if (fullscreenBtn) {
+                    fullscreenBtn.textContent = active ? '⤢ إنهاء الشاشة الكاملة' : '⛶ ملء الشاشة';
+                }
+                document.querySelector('.app')?.classList.toggle('is-fullscreen', active);
+            }
+
+            compactBtn?.addEventListener('click', () => {
+                document.body.classList.toggle('compact-ui');
+                const compact = document.body.classList.contains('compact-ui');
+                compactBtn.textContent = compact ? '▦ واجهة كاملة' : '▦ واجهة مختصرة';
+                uiModeLabel.textContent = compact ? 'الوضع المختصر' : 'الوضع الذكي';
+                showToast(compact ? 'تم تفعيل الواجهة المختصرة' : 'تمت استعادة الواجهة الكاملة');
+            });
+
+            fullscreenBtn?.addEventListener('click', setFullscreen);
+            document.addEventListener('fullscreenchange', syncFullscreenUI);
+
+            window.addEventListener('keydown', (event) => {
+                if (event.key === 'F11') {
+                    event.preventDefault();
+                    setFullscreen();
+                }
+                if (event.key.toLowerCase() === 'c' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+                    compactBtn?.click();
+                }
+            });
+
+            // ============================================================
+            //  V2 STATE — adaptive detection + dual-eye telemetry
+            // ============================================================
+            let blinkStartTime = 0;
+            let isClosed = false;
+            let camera = null;
+            let faceMesh = null;
+            let isRunning = false;
+            let isMuted = false;
+            let alarmLevel = 0;
+
+            let stats = {
+                totalBlinks: 0,
+                closedEvents: 0,
+                alarmEvents: 0,
+                durations: [],
+                maxDuration: 0,
+                currentAlarmStart: null,
+            };
+
+            let DROWSY_LIMIT = 2;
+            let EAR_THRESHOLD = 0.12;
+            let adaptiveThreshold = null;
+            let calibrationActive = false;
+            let calibrationStartedAt = 0;
+            let calibrationSamples = [];
+            const CALIBRATION_MS = 8000;
+
+            const telemetry = window.__antiSleepTelemetry = window.__antiSleepTelemetry || {
+                faceDetected:false, leftEar:null, rightEar:null, avgEar:null,
+                closed:false, closureDuration:0, yaw:0, pitch:0,
+                riskScore:0, perclos:0, blinkRate:0, faceQuality:0,
+                adaptiveThreshold:null, alarmLevel:0, timestamp:0
+            };
+
+            function clamp(value,min,max){ return Math.min(max,Math.max(min,value)); }
+            function getActiveThreshold(){ return Number.isFinite(adaptiveThreshold) ? adaptiveThreshold : EAR_THRESHOLD; }
+
+            function beginCalibration(){
+                calibrationActive = true;
+                calibrationStartedAt = performance.now();
+                calibrationSamples = [];
+                adaptiveThreshold = null;
+                document.body.classList.add('calibration-active');
+                const status = document.getElementById('calibrationStatus');
+                if(status) status.textContent='جاري المعايرة... افتح عينيك وانظر للكاميرا';
+                if(typeof window.showToast==='function') window.showToast('🎯 بدأت المعايرة التلقائية لمدة 8 ثوانٍ');
+            }
+
+            function finishCalibration(force=false){
+                if(!calibrationActive && !force) return;
+                if(calibrationSamples.length >= 8){
+                    const sorted=[...calibrationSamples].sort((a,b)=>a-b);
+                    const median=sorted[Math.floor(sorted.length/2)];
+                    adaptiveThreshold=clamp(median*0.70,0.16,0.30);
+                    const label=document.getElementById('adaptiveThresholdLabel');
+                    if(label) label.textContent='عتبة تكيفية: '+adaptiveThreshold.toFixed(3);
+                    const status=document.getElementById('calibrationStatus');
+                    if(status) status.textContent='✓ تمت المعايرة';
+                } else {
+                    adaptiveThreshold=clamp(EAR_THRESHOLD,0.10,0.40);
+                    const status=document.getElementById('calibrationStatus');
+                    if(status) status.textContent='المعايرة الافتراضية';
+                }
+                calibrationActive=false;
+                document.body.classList.remove('calibration-active');
+                telemetry.adaptiveThreshold=adaptiveThreshold;
+            }
+
+            function resetDetectionProfile(){
+                adaptiveThreshold=null;
+                calibrationActive=false;
+                calibrationSamples=[];
+                document.body.classList.remove('calibration-active');
+                const label=document.getElementById('adaptiveThresholdLabel');
+                if(label) label.textContent='عتبة تكيفية: --';
+                const status=document.getElementById('calibrationStatus');
+                if(status) status.textContent='المعايرة الافتراضية';
+                telemetry.adaptiveThreshold=null;
+            }
+
+            // ============================================================
+            //  AUDIO — three alarm intensity levels
+            // ============================================================
+            let audioCtx = null;
+            let oscillator = null;
+            let gainNode = null;
+
+            function setAlarmLevel(level){
+                alarmLevel=clamp(Math.round(level),1,3);
+                document.body.classList.remove('alarm-level-2','alarm-level-3');
+                if(alarmLevel>=2) document.body.classList.add('alarm-level-2');
+                if(alarmLevel>=3) document.body.classList.add('alarm-level-3');
+                telemetry.alarmLevel=alarmLevel;
+                if(oscillator){
+                    const frequencies={1:880,2:1040,3:1320};
+                    oscillator.frequency.setTargetAtTime(frequencies[alarmLevel],audioCtx.currentTime,0.03);
+                    if(gainNode) gainNode.gain.setTargetAtTime(alarmLevel===1?0.75:alarmLevel===2?0.95:1.15,audioCtx.currentTime,0.03);
+                }
+            }
+
+            function playAlarm(level=1){
+                if(isMuted) return;
+                try{
+                    if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+                    if(audioCtx.state==='suspended') audioCtx.resume();
+                    if(!oscillator){
+                        oscillator=audioCtx.createOscillator();
+                        gainNode=audioCtx.createGain();
+                        oscillator.type='square';
+                        oscillator.connect(gainNode); gainNode.connect(audioCtx.destination);
+                        oscillator.start();
+                    }
+                    setAlarmLevel(level);
+                    alarmWarning.classList.add('show');
+                    statusPanel.classList.add('alarm-active');
+                    eyeStateEl.textContent='🔴 إنذار!';
+                    eyeStateEl.className='status-value alarm';
+                    if(!stats.currentAlarmStart) stats.currentAlarmStart=performance.now();
+                    const overlay=document.getElementById('drowsinessWarningOverlay');
+                    if(overlay){overlay.classList.add('show');overlay.setAttribute('aria-hidden','false');}
+                }catch(e){ console.warn('تعذر تشغيل الصوت:',e); }
+            }
+
+            function stopAlarm(){
+                if(oscillator){
+                    try{oscillator.stop();oscillator.disconnect();}catch(e){}
+                    oscillator=null;gainNode=null;
+                }
+                alarmWarning.classList.remove('show');
+                statusPanel.classList.remove('alarm-active');
+                document.body.classList.remove('alarm-level-2','alarm-level-3');
+                alarmLevel=0;telemetry.alarmLevel=0;
+                const overlay=document.getElementById('drowsinessWarningOverlay');
+                if(overlay){overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');}
+                if(stats.currentAlarmStart){stats.alarmEvents++;stats.currentAlarmStart=null;updateStatsUI();}
+            }
+
+            function resumeAudioContext(){ if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); }
+            function toggleMute(){
+                isMuted=!isMuted;
+                muteBtn.textContent=isMuted?'🔇 مكتوم':'🔊 غير مكتوم';
+                muteBtn.classList.toggle('muted',isMuted);
+                if(isMuted) stopAlarm();
+            }
+
+            // ============================================================
+            //  STATS UI
+            // ============================================================
+            function updateStatsUI(){
+                totalBlinksEl.textContent=stats.totalBlinks;
+                closedCountEl.textContent=stats.closedEvents;
+                alarmCountEl.textContent=stats.alarmEvents;
+                const avg=stats.durations.length?(stats.durations.reduce((a,b)=>a+b,0)/stats.durations.length):0;
+                avgDurationEl.textContent=avg.toFixed(1);
+                avgDurationFooterEl.textContent=avg.toFixed(1);
+                maxDurationEl.textContent=stats.maxDuration.toFixed(1);
+            }
+            function resetStats(){
+                stats={totalBlinks:0,closedEvents:0,alarmEvents:0,durations:[],maxDuration:0,currentAlarmStart:null};
+                updateStatsUI();
+            }
+            function updateCountdown(closedDuration){
+                if(isClosed){
+                    const remaining=Math.max(0,DROWSY_LIMIT-closedDuration);
+                    alarmCountdown.textContent=remaining.toFixed(1)+' ث';
+                    alarmCountdown.style.color=remaining<0.5?'#f43f5e':'#f59e0b';
+                }else{alarmCountdown.textContent='--';alarmCountdown.style.color='';}
+            }
+
+            // ============================================================
+            //  DUAL-EYE EAR
+            // ============================================================
+            function calculateEAR(landmarks,indices){
+                try{
+                    const [outer,inner,upper,lower]=indices.map(i=>landmarks[i]);
+                    if(!outer||!inner||!upper||!lower) return null;
+                    const width=Math.hypot(outer.x-inner.x,outer.y-inner.y);
+                    const height=Math.hypot(upper.x-lower.x,upper.y-lower.y);
+                    return width>0?height/width:null;
+                }catch(e){return null;}
+            }
+            function getEyeAspectRatios(landmarks){
+                const right=calculateEAR(landmarks,[33,133,159,145]);
+                const left=calculateEAR(landmarks,[362,263,386,374]);
+                const values=[right,left].filter(Number.isFinite);
+                return {right,left,average:values.length?values.reduce((a,b)=>a+b,0)/values.length:null};
+            }
+            function estimateHeadPose(landmarks){
+                try{
+                    const nose=landmarks[1], left=landmarks[234], right=landmarks[454], forehead=landmarks[10], chin=landmarks[152];
+                    if(!nose||!left||!right||!forehead||!chin) return {yaw:0,pitch:0};
+                    const dl=Math.max(.001,Math.hypot(nose.x-left.x,nose.y-left.y));
+                    const dr=Math.max(.001,Math.hypot(right.x-nose.x,right.y-nose.y));
+                    const yaw=clamp(((dr-dl)/(dr+dl))*90,-45,45);
+                    const faceHeight=Math.max(.001,chin.y-forehead.y);
+                    const verticalRatio=(nose.y-forehead.y)/faceHeight;
+                    const pitch=clamp((verticalRatio-0.48)*90,-35,35);
+                    return {yaw,pitch};
+                }catch(e){return {yaw:0,pitch:0};}
+            }
+
+            function calculateFaceQuality(landmarks,ear){
+                if(!landmarks||!landmarks.length||!Number.isFinite(ear)) return 0;
+                const nose=landmarks[1], left=landmarks[234], right=landmarks[454];
+                if(!nose||!left||!right) return 40;
+                const width=Math.hypot(right.x-left.x,right.y-left.y);
+                const centered=Math.max(0,1-Math.abs((nose.x-0.5)*1.8));
+                return Math.round(clamp((width>0.12?65:40)+centered*35,0,100));
+            }
+
+            function onResults(results){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                ctx.drawImage(video,0,0,canvas.width,canvas.height);
+                let faceDetected=false;
+
+                if(results.multiFaceLandmarks&&results.multiFaceLandmarks.length>0){
+                    faceDetected=true;
+                    const landmarks=results.multiFaceLandmarks[0];
+                    try{
+                        drawConnectors(ctx,landmarks,FACEMESH_TESSELATION,{color:'#C0C0C080',lineWidth:1});
+                        drawConnectors(ctx,landmarks,FACEMESH_CONTOURS,{color:'#00FFAA',lineWidth:1.5});
+                    }catch(e){}
+
+                    const pTop=landmarks[159],pBottom=landmarks[145];
+                    const eyes=getEyeAspectRatios(landmarks);
+                    const pose=estimateHeadPose(landmarks);
+                    const faceQuality=calculateFaceQuality(landmarks,eyes.average);
+                    const distance=pTop&&pBottom?Math.abs(pTop.y-pBottom.y):null;
+                    if(Number.isFinite(distance)) distanceDisplay.textContent=distance.toFixed(4); else distanceDisplay.textContent='--';
+                    if(Number.isFinite(eyes.average)) earDisplay.textContent=eyes.average.toFixed(3); else earDisplay.textContent='--';
+
+                    if(calibrationActive&&Number.isFinite(eyes.average)&&eyes.average>0.16){
+                        calibrationSamples.push(eyes.average);
+                        if(performance.now()-calibrationStartedAt>=CALIBRATION_MS) finishCalibration();
+                    }
+
+                    const threshold=getActiveThreshold();
+                    const closedCandidates=[eyes.right,eyes.left].filter(Number.isFinite).map(v=>v<threshold);
+                    const isEyeClosed=closedCandidates.length>=2?closedCandidates.every(Boolean):(closedCandidates[0]===true);
+
+                    if(isEyeClosed){
+                        if(!isClosed){blinkStartTime=performance.now();isClosed=true;stats.closedEvents++;stats.totalBlinks++;}
+                        const closedDuration=(performance.now()-blinkStartTime)/1000;
+                        timerDisplay.textContent=closedDuration.toFixed(1)+' ث';
+                        eyeStateEl.textContent='😴 مغلقة';eyeStateEl.className='status-value closed';
+                        updateCountdown(closedDuration);
+                        const riskNow=Number(telemetry.riskScore)||0;
+                        if(closedDuration>DROWSY_LIMIT){
+                            const level=riskNow>=82||closedDuration>=DROWSY_LIMIT+2?3:(riskNow>=60||closedDuration>=DROWSY_LIMIT+1?2:1);
+                            playAlarm(level);
+                            alarmDurationDisplay.textContent=((performance.now()-blinkStartTime)/1000).toFixed(1)+'ث';
+                        }else stopAlarm();
+                        telemetry.closureDuration=closedDuration;
+                    }else{
+                        if(isClosed){
+                            const duration=(performance.now()-blinkStartTime)/1000;
+                            if(duration>0.1){stats.durations.push(duration);stats.maxDuration=Math.max(stats.maxDuration,duration);updateStatsUI();}
+                        }
+                        isClosed=false;stopAlarm();timerDisplay.textContent='0.0 ث';
+                        eyeStateEl.textContent='👁️ مفتوحة';eyeStateEl.className='status-value';
+                        alarmCountdown.textContent='--';alarmDurationDisplay.textContent='';updateCountdown(0);
+                        telemetry.closureDuration=0;
+                    }
+
+                    telemetry.faceDetected=true;
+                    telemetry.leftEar=eyes.right;
+                    telemetry.rightEar=eyes.left;
+                    telemetry.avgEar=eyes.average;
+                    telemetry.closed=isClosed;
+                    telemetry.yaw=pose.yaw;
+                    telemetry.pitch=pose.pitch;
+                    telemetry.faceQuality=faceQuality;
+                    telemetry.timestamp=performance.now();
+                }else{
+                    resetState();
+                    distanceDisplay.textContent='--';earDisplay.textContent='--';
+                    telemetry.faceDetected=false;telemetry.leftEar=null;telemetry.rightEar=null;telemetry.avgEar=null;telemetry.closed=false;telemetry.closureDuration=0;telemetry.faceQuality=0;telemetry.timestamp=performance.now();
+                }
+
+                if(isRunning){statusDot.className='dot';statusLabel.textContent='تشغيل';}
+            }
+
+            function resetState(){
+                if(isClosed){
+                    const duration=(performance.now()-blinkStartTime)/1000;
+                    if(duration>0.1){stats.durations.push(duration);stats.maxDuration=Math.max(stats.maxDuration,duration);updateStatsUI();}
+                }
+                isClosed=false;stopAlarm();timerDisplay.textContent='0.0 ث';eyeStateEl.textContent='👁️ مفتوحة';eyeStateEl.className='status-value';alarmCountdown.textContent='--';alarmDurationDisplay.textContent='';updateCountdown(0);
+                telemetry.closed=false;telemetry.closureDuration=0;
+            }
+
+            function initializeFaceMesh(){
+                faceMesh=new FaceMesh({locateFile:file=>`https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`});
+                faceMesh.setOptions({maxNumFaces:1,refineLandmarks:true,minDetectionConfidence:0.55,minTrackingConfidence:0.55});
+                faceMesh.onResults(onResults);
+            }
+
+            // ============================================================
+            // ============================================================
+            //  CAMERA
+            // ============================================================
+            async function startCamera() {
+                if (camera) {
+                    await stopCamera();
+                }
+
+                canvas.width = 640;
+                canvas.height = 480;
+
+                try {
+                    camera = new Camera(video, {
+                        onFrame: async () => {
+                            if (faceMesh) {
+                                await faceMesh.send({ image: video });
+                            }
+                        },
+                        width: 640,
+                        height: 480,
+                        facingMode: 'user'
+                    });
+
+                    await camera.start();
+
+                    isRunning = true;
+                    startBtn.disabled = true;
+                    stopBtn.disabled = false;
+                    startBtn.textContent = '⏳ جارٍ التشغيل...';
+                    statusDot.className = 'dot';
+                    statusLabel.textContent = 'تشغيل';
+                    resetDetectionProfile();
+                    beginCalibration();
+                    resumeAudioContext();
+                    window.dispatchEvent(new CustomEvent('antiSleepCameraStarted'));
+
+                } catch (err) {
+                    console.error('خطأ في الكاميرا:', err);
+                    alert('تعذر الوصول إلى الكاميرا. تأكد من منح الإذن.');
+                    startBtn.disabled = false;
+                    stopBtn.disabled = true;
+                    startBtn.textContent = '▶ بدء الكاميرا';
+                    isRunning = false;
+                    finishCalibration(true);
+                    statusDot.className = 'dot inactive';
+                    statusLabel.textContent = 'غير نشط';
+                    window.dispatchEvent(new CustomEvent('antiSleepCameraFailed'));
+                }
+            }
+
+            async function stopCamera() {
+                if (camera) {
+                    try {
+                        await camera.stop();
+                    } catch (e) { /* ignore */ }
+                    camera = null;
+                }
+
+                stopAlarm();
+                resetState();
+
+                video.srcObject = null;
+
+                isRunning = false;
+                finishCalibration(true);
+                startBtn.disabled = false;
+                stopBtn.disabled = true;
+                startBtn.textContent = '▶ بدء الكاميرا';
+                window.dispatchEvent(new CustomEvent('antiSleepCameraStopped'));
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                distanceDisplay.textContent = '--';
+                earDisplay.textContent = '--';
+
+                statusDot.className = 'dot inactive';
+                statusLabel.textContent = 'غير نشط';
+            }
+
+            // ============================================================
+            //  EVENTS
+            // ============================================================
+            startBtn.addEventListener('click', () => {
+                if (!audioCtx) {
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                }
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                startCamera();
+            });
+
+            stopBtn.addEventListener('click', stopCamera);
+
+            muteBtn.addEventListener('click', toggleMute);
+
+            thresholdSlider.addEventListener('input', function() {
+                DROWSY_LIMIT = parseFloat(this.value);
+                thresholdValue.textContent = DROWSY_LIMIT.toFixed(1);
+                if (isClosed) {
+                    const closedDuration = (performance.now() - blinkStartTime) / 1000;
+                    updateCountdown(closedDuration);
+                }
+            });
+
+            earThresholdSlider.addEventListener('input', function() {
+                EAR_THRESHOLD = parseFloat(this.value);
+                earThresholdValue.textContent = EAR_THRESHOLD.toFixed(2);
+            });
+
+            resetStatsBtn.addEventListener('click', resetStats);
+
+            // ============================================================
+            //  CLEANUP
+            // ============================================================
+            window.addEventListener('beforeunload', () => {
+                if (camera) {
+                    try { camera.stop(); } catch (e) {}
+                }
+                if (oscillator) {
+                    try { oscillator.stop(); } catch (e) {}
+                }
+                if (audioCtx) {
+                    try { audioCtx.close(); } catch (e) {}
+                }
+            });
+
+            // ============================================================
+            //  INIT
+            // ============================================================
+            initializeFaceMesh();
+            resetStats();
+            statusDot.className = 'dot inactive';
+            statusLabel.textContent = 'غير نشط';
+
+            console.log('✅ موقع الإنذار جاهز! اضغط "بدء الكاميرا".');
+
+        })();
+    </script>
+
 
 <script>
 /* ============================================================
-   ADVANCED ANALYTICS CONTROLLER
-   This layer observes existing DOM values/events only.
-   It does NOT alter MediaPipe, EAR calculation, thresholds,
-   camera settings, alarm conditions, or detection state.
+   V2 ANALYTICS / RISK ENGINE
+   Privacy-first: only aggregated session summaries are persisted.
    ============================================================ */
 (function(){
 'use strict';
+const $=id=>document.getElementById(id);
+const video=$('video'), startBtn=$('startBtn'), stopBtn=$('stopBtn'), alarmWarning=$('alarmWarning'), alarmCountEl=$('alarmCount'), statusLabel=$('statusLabel'), muteBtn=$('muteBtn');
+const chart=$('earChart'), chartCtx=chart?chart.getContext('2d'):null, chartEmpty=$('chartEmpty');
+const telemetry=window.__antiSleepTelemetry||{};
+const earData=[];
+let minEar=Infinity,earSum=0,earSamples=0;
+let sessionStart=null,sessionElapsedBeforePause=0,sessionActive=false;
+let sessionAlarmCount=0,sessionAlertSeconds=0,lastAlarmState=false,lastAlarmStart=null,lastAlertText='--';
+let sampleHandle=null,fpsFrames=0,fpsLast=performance.now(),fps=0,deferredInstallPrompt=null;
+let perclosSamples=[];let blinkWindow=[];let lastBlinkCount=0;
 
-const $ = id => document.getElementById(id);
-const video = $('video');
-const earEl = $('earDisplay');
-const distanceEl = $('distanceDisplay');
-const eyeStateEl = $('eyeState');
-const startBtn = $('startBtn');
-const stopBtn = $('stopBtn');
-const alarmWarning = $('alarmWarning');
-const alarmCountEl = $('alarmCount');
-const statusLabel = $('statusLabel');
-const muteBtn = $('muteBtn');
-
-const chart = $('earChart');
-const chartCtx = chart ? chart.getContext('2d') : null;
-const chartEmpty = $('chartEmpty');
-const earData = [];
-let minEar = Infinity, earSum = 0, earSamples = 0;
-let sessionStart = null, sessionElapsedBeforePause = 0;
-let sessionActive = false;
-let sessionAlarmCount = 0;
-let sessionAlertSeconds = 0;
-let lastAlarmState = false;
-let lastAlarmStart = null;
-let lastAlertText = '--';
-let timerHandle = null;
-let sampleHandle = null;
-let fpsFrames = 0, fpsLast = performance.now(), fps = 0;
-let deferredInstallPrompt = null;
-
-function formatDateTime(date = new Date()) {
-    const pad = n => String(n).padStart(2, '0');
-    return `${date.getFullYear()}/${pad(date.getMonth() + 1)}/${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
-}
-
-function formatTime(sec){
-    sec = Math.max(0, Math.floor(sec));
-    const h = String(Math.floor(sec/3600)).padStart(2,'0');
-    const m = String(Math.floor((sec%3600)/60)).padStart(2,'0');
-    const s = String(sec%60).padStart(2,'0');
-    return `${h}:${m}:${s}`;
-}
-function sessionSeconds(){
-    return sessionElapsedBeforePause + (sessionActive && sessionStart ? (Date.now()-sessionStart)/1000 : 0);
-}
-function updateSessionTimer(){ const el=$('sessionTimer'); if(el) el.textContent=formatTime(sessionSeconds()); }
-function setHealth(id, text, cls){
-    const el=$(id); if(!el) return;
-    el.textContent=text; el.className='system-status '+(cls||'');
-}
-function showChart(){
-    if(chartEmpty) chartEmpty.style.display = earData.length ? 'none' : 'grid';
-}
-function drawChart(){
-    if(!chartCtx || !chart) return;
-    const w=chart.width, h=chart.height;
-    chartCtx.clearRect(0,0,w,h);
-    chartCtx.strokeStyle='rgba(148,163,200,.10)';
-    chartCtx.lineWidth=1;
-    for(let i=1;i<5;i++){ const y=(h/5)*i; chartCtx.beginPath(); chartCtx.moveTo(0,y); chartCtx.lineTo(w,y); chartCtx.stroke(); }
-    if(earData.length<2){ showChart(); return; }
-    const min=0.05,max=0.45;
-    chartCtx.beginPath();
-    earData.forEach((v,i)=>{
-        const x=(i/(Math.max(1,earData.length-1)))*w;
-        const y=h-((Math.min(max,Math.max(min,v))-min)/(max-min))*h;
-        if(i===0) chartCtx.moveTo(x,y); else chartCtx.lineTo(x,y);
-    });
-    chartCtx.strokeStyle='#22d3ee'; chartCtx.lineWidth=2; chartCtx.stroke();
-    const threshold = parseFloat($('earThresholdSlider')?.value || '0.12');
-    const ty=h-((threshold-min)/(max-min))*h;
-    chartCtx.setLineDash([5,5]); chartCtx.strokeStyle='rgba(244,63,94,.55)';
-    chartCtx.beginPath(); chartCtx.moveTo(0,ty); chartCtx.lineTo(w,ty); chartCtx.stroke(); chartCtx.setLineDash([]);
-    showChart();
-}
-function addEarSample(v){
-    if(!Number.isFinite(v)) return;
-    earData.push(v); if(earData.length>60) earData.shift();
-    minEar=Math.min(minEar,v); earSum+=v; earSamples++;
-    $('analyticsEar').textContent=v.toFixed(3);
-    $('minEar').textContent=minEar.toFixed(3);
-    $('avgEar').textContent=(earSum/earSamples).toFixed(3);
-    drawChart();
-}
-function updateQuality(){
-    const running = statusLabel?.textContent === 'تشغيل';
-    const hasFace = distanceEl && distanceEl.textContent !== '--' && distanceEl.textContent.trim() !== '';
-    const ear = parseFloat(earEl?.textContent);
-    let score=0;
-    if(running) score+=25;
-    if(hasFace) score+=35;
-    if(Number.isFinite(ear)) score+=30;
-    if(video && video.readyState>=2) score+=10;
-    score=Math.min(100,score);
-    const ring=$('qualityRing');
-    if(ring) ring.style.background=`conic-gradient(var(--accent-green) ${score*3.6}deg,rgba(148,163,200,.12) ${score*3.6}deg)`;
-    $('qualityPercent').textContent=score+'%';
-    $('qualityProgress').style.width=score+'%';
-    let label='في انتظار الكاميرا',detail='ابدأ النظام للحصول على تقييم التتبع.';
-    if(score>=85){label='ممتاز';detail='الوجه والعينان قيد التتبع بشكل مستقر.'}
-    else if(score>=55){label='جيد';detail='التتبع يعمل، حاول الحفاظ على إضاءة ومسافة ثابتة.'}
-    else if(running){label='يحتاج تحسين';detail='ضع الوجه داخل الإطار وتأكد من الإضاءة.'}
-    $('qualityLabel').textContent=label;$('qualityDetail').textContent=detail;
-    setHealth('cameraHealth',running?'متصل':'جاهز',running?'ok':'');
-    setHealth('faceHealth',hasFace?'مكتشف':'انتظار',hasFace?'ok':'warn');
-    setHealth('eyeHealth',Number.isFinite(ear)?'مستقر':'انتظار',Number.isFinite(ear)?'ok':'warn');
-    setHealth('audioHealth',muteBtn?.textContent.includes('مكتوم')?'مكتوم':'جاهز',muteBtn?.textContent.includes('مكتوم')?'warn':'ok');
-}
-function tick(){
-    updateSessionTimer();
-    const ear=parseFloat(earEl?.textContent);
-    if(Number.isFinite(ear)) addEarSample(ear);
-    updateQuality();
-    fpsFrames++;
-    const now=performance.now();
-    if(now-fpsLast>=1000){ fps=fpsFrames; fpsFrames=0; fpsLast=now; $('fpsValue').textContent=fps+' FPS'; }
-    const alarming=!!alarmWarning?.classList.contains('show');
-    if(alarming && !lastAlarmState){
-        sessionAlarmCount++;
-        lastAlarmStart=Date.now();
-        lastAlertText=formatDateTime();
-        $('lastAlert').textContent=lastAlertText;
-        $('sessionAlerts').textContent=sessionAlarmCount;
-    }
-    if(!alarming && lastAlarmState && lastAlarmStart){
-        sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;
-        lastAlarmStart=null;
-        $('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';
-    }
-    lastAlarmState=alarming;
-}
-function startSession(){
-    if(sessionActive) return;
-    sessionStart=Date.now(); sessionActive=true;
-    showToast('تم بدء جلسة المراقبة');
-}
-function stopSession(save=true){
-    if(!sessionActive && !sessionStart) return;
-    sessionElapsedBeforePause=sessionSeconds();
-    sessionActive=false; sessionStart=null;
-    if(lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;}
-    $('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';
-    if(save && sessionElapsedBeforePause>=1) saveSession();
-    showToast('تم إنهاء جلسة المراقبة');
-}
-function resetSessionMetrics(){
-    sessionStart=null;sessionElapsedBeforePause=0;sessionActive=false;
-    sessionAlarmCount=0;sessionAlertSeconds=0;lastAlarmStart=null;lastAlarmState=false;
-    $('sessionAlerts').textContent='0';$('lastAlert').textContent='--';$('totalAlertTime').textContent='0.0 ث';updateSessionTimer();
-}
-window.loadHistory=function loadHistory(){
-    let list=[]; try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}
-    const box=$('historyList'); if(!box)return;
-    if(!list.length){box.innerHTML='<div class="empty-history">لا توجد جلسات محفوظة بعد.</div>';return;}
-    box.innerHTML=list.slice(0,12).map(x=>`<div class="history-item"><strong>${x.date}</strong><span>${formatTime(x.duration)}</span><span>🚨 ${x.alerts} • EAR ${x.avgEar}</span></div>`).join('');
-}
-function saveSession(){
-    const avg=earSamples?(earSum/earSamples).toFixed(3):'--';
-    const engine=(typeof window.__antiSleepEngineSnapshot==='function')?window.__antiSleepEngineSnapshot():{}; const item={date:formatDateTime(),duration:Math.round(sessionElapsedBeforePause),alerts:sessionAlarmCount,alertSeconds:Number(sessionAlertSeconds.toFixed(1)),avgEar:avg,minEar:minEar===Infinity?'--':minEar.toFixed(3),perclos:engine.perclos??null,riskScore:engine.riskScore??null,blinkRate:engine.blinkRate??null,microSleepCount:engine.microSleepCount??0,confidence:engine.riskConfidence??null};
-    let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}
-    list.unshift(item);localStorage.setItem('antiSleepSessions',JSON.stringify(list.slice(0,30)));loadHistory();
-    if(typeof window.__antiSleepSaveRemoteSession==='function'){
-        window.__antiSleepSaveRemoteSession({
-            durationSeconds:Math.max(1,Math.round(sessionElapsedBeforePause)),
-            alertCount:Math.max(0,Math.round(sessionAlarmCount)),
-            alertSeconds:Math.max(0,Number(sessionAlertSeconds.toFixed(1))),
-            completed:true,avgEar:avg==='--'?null:Number(avg),minEar:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:engine.perclos??null,riskScore:engine.riskScore??null,blinkRate:engine.blinkRate??null,microSleepCount:engine.microSleepCount??0,confidence:engine.riskConfidence??null,yaw:engine.yaw??null,pitch:engine.pitch??null
-        });
-    }
-}
-function exportReport(){
-    const coreAlarms=parseInt(alarmCountEl?.textContent||'0',10)||0;
-    const report={
-        application:'Anti Sleep System by MADOUNINE HACENE',
-        exportedAt:formatDateTime(),
-        sessionDurationSeconds:Math.round(sessionSeconds()),
-        sessionDuration:formatTime(sessionSeconds()),
-        sessionAlerts:sessionAlarmCount,
-        totalAlertSeconds:Number(sessionAlertSeconds.toFixed(1)),
-        totalAlarms:coreAlarms,
-        averageEAR:earSamples?(earSum/earSamples).toFixed(3):null,
-        minimumEAR:minEar===Infinity?null:Number(minEar.toFixed(3)),
-        approximateFPS:fps||null,
-        privacy:'Processed locally in the browser'
-    };
-    const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'});
-    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='anti-sleep-session-report.json';a.click();URL.revokeObjectURL(a.href);
-    showToast('تم تصدير تقرير الجلسة');
-}
-function showToast(msg){
-    const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window.__antiToast);window.__antiToast=setTimeout(()=>t.classList.remove('show'),1800);
-}
-function updateNetwork(){
-    const b=$('networkBadge');if(!b)return;
-    if(navigator.onLine){b.textContent='● متصل';b.classList.remove('offline')}
-    else{b.textContent='● وضع عدم الاتصال';b.classList.add('offline')}
-}
-function updateSW(){
-    const sw=$('swHealth'), off=$('offlineHealth');
-    if(!('serviceWorker' in navigator)){setHealth('swHealth','غير مدعوم','bad');setHealth('offlineHealth','غير متاح','bad');return}
-    navigator.serviceWorker.ready.then(()=>{setHealth('swHealth','نشط','ok');setHealth('offlineHealth','جاهز','ok')}).catch(()=>{setHealth('swHealth','خطأ','bad');setHealth('offlineHealth','غير مؤكد','warn')});
-}
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;$('installBtn')?.classList.add('install-btn','show')});
-$('installBtn')?.addEventListener('click',async()=>{
-    if(!deferredInstallPrompt){showToast('التطبيق مثبت أو التثبيت غير متاح حاليًا');return}
-    deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$('installBtn')?.classList.remove('show');
-});
-window.addEventListener('appinstalled',()=>{showToast('تم تثبيت Anti Sleep System بنجاح');$('installBtn')?.classList.remove('show')});
-$('exportBtn')?.addEventListener('click',exportReport);
-$('clearHistoryBtn')?.addEventListener('click',()=>{if(confirm('هل تريد حذف سجل الجلسات المحفوظ محليًا؟')){localStorage.removeItem('antiSleepSessions');loadHistory();showToast('تم حذف سجل الجلسات')}});
-startBtn?.addEventListener('click',()=>{resetSessionMetrics();startSession();},{capture:true});
-stopBtn?.addEventListener('click',()=>{stopSession(true)},{capture:true});
-window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);
-loadHistory();updateNetwork();updateSW();updateQuality();
-sampleHandle=setInterval(tick,250);
-window.addEventListener('beforeunload',()=>{if(sessionActive)stopSession(true);clearInterval(sampleHandle);clearInterval(timerHandle)});
+function formatDateTime(date=new Date()){const pad=n=>String(n).padStart(2,'0');return `${date.getFullYear()}/${pad(date.getMonth()+1)}/${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;}
+function formatTime(sec){sec=Math.max(0,Math.floor(sec));const h=String(Math.floor(sec/3600)).padStart(2,'0'),m=String(Math.floor((sec%3600)/60)).padStart(2,'0'),s=String(sec%60).padStart(2,'0');return `${h}:${m}:${s}`;}
+function sessionSeconds(){return sessionElapsedBeforePause+(sessionActive&&sessionStart?(Date.now()-sessionStart)/1000:0);}
+function updateSessionTimer(){const el=$('sessionTimer');if(el)el.textContent=formatTime(sessionSeconds());}
+function setHealth(id,text,cls){const el=$(id);if(!el)return;el.textContent=text;el.className='system-status '+(cls||'');}
+function showToast(msg){const t=$('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(window.__antiToast);window.__antiToast=setTimeout(()=>t.classList.remove('show'),1800);}
+window.showToast=showToast;
+function drawChart(){if(!chartCtx||!chart)return;const w=chart.width,h=chart.height;chartCtx.clearRect(0,0,w,h);chartCtx.strokeStyle='rgba(148,163,200,.10)';chartCtx.lineWidth=1;for(let i=1;i<5;i++){const y=h/5*i;chartCtx.beginPath();chartCtx.moveTo(0,y);chartCtx.lineTo(w,y);chartCtx.stroke();}if(earData.length<2){if(chartEmpty)chartEmpty.style.display='grid';return;}if(chartEmpty)chartEmpty.style.display='none';const min=.05,max=.45;chartCtx.beginPath();earData.forEach((v,i)=>{const x=i/(Math.max(1,earData.length-1))*w,y=h-((Math.min(max,Math.max(min,v))-min)/(max-min))*h;i?chartCtx.lineTo(x,y):chartCtx.moveTo(x,y);});chartCtx.strokeStyle='#22d3ee';chartCtx.lineWidth=2;chartCtx.stroke();const threshold=Number(telemetry.adaptiveThreshold||$('earThresholdSlider')?.value||.12),ty=h-((threshold-min)/(max-min))*h;chartCtx.setLineDash([5,5]);chartCtx.strokeStyle='rgba(244,63,94,.55)';chartCtx.beginPath();chartCtx.moveTo(0,ty);chartCtx.lineTo(w,ty);chartCtx.stroke();chartCtx.setLineDash([]);}
+function addEarSample(v){if(!Number.isFinite(v))return;earData.push(v);if(earData.length>60)earData.shift();minEar=Math.min(minEar,v);earSum+=v;earSamples++;$('analyticsEar').textContent=v.toFixed(3);$('minEar').textContent=minEar.toFixed(3);$('avgEar').textContent=(earSum/earSamples).toFixed(3);drawChart();}
+function computePerclos(now){perclosSamples.push({t:now,closed:!!telemetry.closed});const cutoff=now-60000;while(perclosSamples.length&&perclosSamples[0].t<cutoff)perclosSamples.shift();if(!perclosSamples.length)return 0;const closed=perclosSamples.reduce((n,x)=>n+(x.closed?1:0),0);return closed/perclosSamples.length*100;}
+function computeRisk(perclos){const ear=Number(telemetry.avgEar),threshold=Number(telemetry.adaptiveThreshold||$('earThresholdSlider')?.value||.12),closure=Number(telemetry.closureDuration)||0,pitch=Math.abs(Number(telemetry.pitch)||0);let score=0;if(Number.isFinite(ear)){if(ear<threshold)score+=Math.min(42,(threshold-ear)/Math.max(.02,threshold)*42);}score+=Math.min(30,Math.max(0,(perclos-4)*1.25));if(closure>0)score+=Math.min(28,closure>2?(closure-1)*14:closure*7);if(pitch>10)score+=Math.min(15,(pitch-10)*.6);if(!telemetry.faceDetected)score=Math.min(score,25);return Math.round(Math.max(0,Math.min(100,score)));}
+function riskLabel(score){if(score>=80)return ['CRITICAL','critical'];if(score>=60)return ['HIGH','high'];if(score>=40)return ['MODERATE','moderate'];if(score>=20)return ['LOW','low'];return ['SAFE','safe'];}
+function updateRisk(now){const perclos=computePerclos(now);const score=computeRisk(perclos);telemetry.perclos=perclos;telemetry.riskScore=score;const state=riskLabel(score),stateEl=$('riskState');if(stateEl){stateEl.textContent=state[0];stateEl.className='risk-state '+state[1];}const ring=$('riskRing');if(ring)ring.style.background=`conic-gradient(${score>=80?'var(--accent-rose)':score>=40?'var(--accent-amber)':'var(--accent-green)'} ${score*3.6}deg,rgba(148,163,200,.1) ${score*3.6}deg)`;$('riskScore').textContent=score;$('riskProgress').style.width=score+'%';$('riskEar').textContent=Number.isFinite(Number(telemetry.avgEar))?Number(telemetry.avgEar).toFixed(3):'--';$('riskPerclos').textContent=perclos.toFixed(1)+'%';$('riskClosure').textContent=(Number(telemetry.closureDuration)||0).toFixed(1)+'ث';const pitch=Number(telemetry.pitch)||0,yaw=Number(telemetry.yaw)||0;$('riskYaw').textContent=(yaw>=0?'+':'')+yaw.toFixed(0)+'°';$('riskPitch').textContent=(pitch>=0?'+':'')+pitch.toFixed(0)+'°';$('riskHead').textContent=Math.abs(pitch)>12?'منخفض ⚠️':Math.abs(yaw)>30?'مدار ↔':'مستقيم';$('leftEarValue').textContent=Number.isFinite(Number(telemetry.leftEar))?Number(telemetry.leftEar).toFixed(3):'--';$('rightEarValue').textContent=Number.isFinite(Number(telemetry.rightEar))?Number(telemetry.rightEar).toFixed(3):'--';$('faceQualityValue').textContent=Number.isFinite(Number(telemetry.faceQuality))?Number(telemetry.faceQuality)+'%':'--';$('adaptiveThresholdLabel').textContent='عتبة تكيفية: '+(Number.isFinite(Number(telemetry.adaptiveThreshold))?Number(telemetry.adaptiveThreshold).toFixed(3):'--');}
+function updateBlinkRate(now){const current=parseInt($('totalBlinks')?.textContent||'0',10)||0;if(current!==lastBlinkCount){for(let i=lastBlinkCount;i<current;i++)blinkWindow.push(now);lastBlinkCount=current;}const cutoff=now-60000;while(blinkWindow.length&&blinkWindow[0]<cutoff)blinkWindow.shift();$('blinkRateValue').textContent=blinkWindow.length+' / دقيقة';telemetry.blinkRate=blinkWindow.length;}
+function updateQuality(){const running=statusLabel?.textContent==='تشغيل',hasFace=!!telemetry.faceDetected,ear=Number(telemetry.avgEar);let score=0;if(running)score+=20;if(hasFace)score+=35;if(Number.isFinite(ear))score+=30;if(video&&video.readyState>=2)score+=15;score=Math.min(100,score);const ring=$('qualityRing');if(ring)ring.style.background=`conic-gradient(var(--accent-green) ${score*3.6}deg,rgba(148,163,200,.12) ${score*3.6}deg)`;$('qualityPercent').textContent=score+'%';$('qualityProgress').style.width=score+'%';let label='في انتظار الكاميرا',detail='ابدأ النظام للحصول على تقييم التتبع.';if(score>=85){label='ممتاز';detail='الوجه والعينان قيد التتبع بشكل مستقر.'}else if(score>=55){label='جيد';detail='التتبع يعمل، حافظ على إضاءة ومسافة ثابتة.'}else if(running){label='يحتاج تحسين';detail='ضع الوجه داخل الإطار وتأكد من الإضاءة.'}$('qualityLabel').textContent=label;$('qualityDetail').textContent=detail;setHealth('cameraHealth',running?'متصل':'جاهز',running?'ok':'');setHealth('faceHealth',hasFace?'مكتشف':'انتظار',hasFace?'ok':'warn');setHealth('eyeHealth',Number.isFinite(ear)?'مستقر':'انتظار',Number.isFinite(ear)?'ok':'warn');setHealth('audioHealth',muteBtn?.textContent.includes('مكتوم')?'مكتوم':'جاهز',muteBtn?.textContent.includes('مكتوم')?'warn':'ok');}
+function tick(){updateSessionTimer();const now=performance.now(),ear=Number(telemetry.avgEar);if(Number.isFinite(ear))addEarSample(ear);updateRisk(now);updateBlinkRate(now);updateQuality();fpsFrames++;if(now-fpsLast>=1000){fps=fpsFrames;fpsFrames=0;fpsLast=now;$('fpsValue').textContent=fps+' FPS';}const alarming=!!alarmWarning?.classList.contains('show');if(alarming&&!lastAlarmState){sessionAlarmCount++;lastAlarmStart=Date.now();lastAlertText=formatDateTime();$('lastAlert').textContent=lastAlertText;$('sessionAlerts').textContent=sessionAlarmCount;}if(!alarming&&lastAlarmState&&lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';}lastAlarmState=alarming;}
+function startSession(){if(sessionActive)return;sessionStart=Date.now();sessionActive=true;showToast('تم بدء جلسة المراقبة');}
+function stopSession(save=true){if(!sessionActive&&!sessionStart)return;sessionElapsedBeforePause=sessionSeconds();sessionActive=false;sessionStart=null;if(lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;}$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';if(save&&sessionElapsedBeforePause>=1)saveSession();showToast('تم إنهاء جلسة المراقبة');}
+function resetSessionMetrics(){sessionStart=null;sessionElapsedBeforePause=0;sessionActive=false;sessionAlarmCount=0;sessionAlertSeconds=0;lastAlarmStart=null;lastAlarmState=false;earData.length=0;perclosSamples=[];blinkWindow=[];minEar=Infinity;earSum=0;earSamples=0;lastBlinkCount=0;telemetry.perclos=0;telemetry.riskScore=0;$('sessionAlerts').textContent='0';$('lastAlert').textContent='--';$('totalAlertTime').textContent='0.0 ث';$('riskScore').textContent='0';$('riskPerclos').textContent='0%';updateSessionTimer();drawChart();}
+window.loadHistory=function loadHistory(){let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}const box=$('historyList');if(!box)return;if(!list.length){box.innerHTML='<div class="empty-history">لا توجد جلسات محفوظة بعد.</div>';return;}box.innerHTML=list.slice(0,12).map(x=>`<div class="history-item"><strong>${x.date}</strong><span>${formatTime(x.duration)}</span><span>🚨 ${x.alerts} • EAR ${x.avgEar||'--'} • Risk ${x.riskScore??'--'}</span></div>`).join('');}
+function saveSession(){const avg=earSamples?(earSum/earSamples).toFixed(3):'--',item={date:formatDateTime(),duration:Math.round(sessionElapsedBeforePause),alerts:sessionAlarmCount,alertSeconds:Number(sessionAlertSeconds.toFixed(1)),avgEar:avg,minEar:minEar===Infinity?'--':minEar.toFixed(3),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)};let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}list.unshift(item);localStorage.setItem('antiSleepSessions',JSON.stringify(list.slice(0,30)));loadHistory();if(typeof window.__antiSleepSaveRemoteSession==='function'){window.__antiSleepSaveRemoteSession({durationSeconds:Math.max(1,Math.round(sessionElapsedBeforePause)),alertCount:Math.max(0,Math.round(sessionAlarmCount)),alertSeconds:Math.max(0,Number(sessionAlertSeconds.toFixed(1))),completed:true,avgEar:Number.isFinite(Number(avg))?Number(avg):null,minEar:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)});}}
+function exportReport(){const report={application:'Anti Sleep System by MADOUNINE HACENE',version:'2.0',exportedAt:formatDateTime(),sessionDurationSeconds:Math.round(sessionSeconds()),sessionDuration:formatTime(sessionSeconds()),sessionAlerts:sessionAlarmCount,totalAlertSeconds:Number(sessionAlertSeconds.toFixed(1)),totalAlarms:parseInt(alarmCountEl?.textContent||'0',10)||0,averageEAR:earSamples?(earSum/earSamples).toFixed(3):null,minimumEAR:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0),blinkRate:Number(telemetry.blinkRate||0),approximateFPS:fps||null,privacy:'Processed locally in the browser; only aggregated session summaries may be synced.'};const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='anti-sleep-session-report.json';a.click();URL.revokeObjectURL(a.href);showToast('تم تصدير تقرير الجلسة');}
+function updateNetwork(){const b=$('networkBadge');if(!b)return;if(navigator.onLine){b.textContent='● متصل';b.classList.remove('offline')}else{b.textContent='● وضع عدم الاتصال';b.classList.add('offline')}}
+function updateSW(){if(!('serviceWorker'in navigator)){setHealth('swHealth','غير مدعوم','bad');setHealth('offlineHealth','غير متاح','bad');return;}navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{setHealth('swHealth','نشط','ok');setHealth('offlineHealth','جاهز','ok')}).catch(()=>{setHealth('swHealth','خطأ','bad');setHealth('offlineHealth','غير مؤكد','warn')});}
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;$('installBtn')?.classList.add('install-btn','show')});$('installBtn')?.addEventListener('click',async()=>{if(!deferredInstallPrompt){showToast('التطبيق مثبت أو التثبيت غير متاح حاليًا');return;}deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$('installBtn')?.classList.remove('show')});window.addEventListener('appinstalled',()=>{showToast('تم تثبيت Anti Sleep System بنجاح');$('installBtn')?.classList.remove('show')});
+$('exportBtn')?.addEventListener('click',exportReport);$('clearHistoryBtn')?.addEventListener('click',()=>{if(confirm('هل تريد حذف سجل الجلسات المحفوظ محليًا؟')){localStorage.removeItem('antiSleepSessions');loadHistory();showToast('تم حذف سجل الجلسات')}});
+startBtn?.addEventListener('click',()=>{resetSessionMetrics();startSession()},{capture:true});stopBtn?.addEventListener('click',()=>{stopSession(true)},{capture:true});window.addEventListener('antiSleepCameraFailed',()=>stopSession(false));window.addEventListener('antiSleepCameraStopped',()=>{if(sessionActive)stopSession(true)});window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);
+loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterval(tick,250);window.addEventListener('beforeunload',()=>{if(sessionActive)stopSession(true);clearInterval(sampleHandle)});
 })();
 </script>
 
@@ -2524,7 +2844,13 @@ window.addEventListener('beforeunload',()=>{if(sessionActive)stopSession(true);c
     sync();
 })();
 </script>
-<script src="./i18n.js"></script>
 
+<script src="./i18n.js"></script>
+<script src="./platform.js"></script>
+
+<script>
+window.__antiSleepPwaRegistration=true;
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
 </body>
 </html>
