@@ -1342,6 +1342,16 @@
         @media(max-width:600px){.auth-user-area{width:100%;justify-content:flex-end}.auth-btn{flex:1}.auth-user-badge{flex:1;justify-content:center}.auth-card{padding:18px}}
 
 
+
+        /* ====== LANGUAGE SWITCHER ====== */
+        .language-switcher{display:flex;align-items:center;gap:4px;padding:4px;border:1px solid var(--border-color);background:rgba(26,35,50,.78);border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.18);direction:ltr!important;flex-shrink:0}
+        .language-switcher .language-icon{font-size:16px;padding:0 4px;line-height:1}
+        .language-switcher button{appearance:none;border:0;background:transparent;color:var(--text-secondary);font:700 11px/1 var(--font);min-width:34px;height:30px;padding:0 8px;border-radius:8px;cursor:pointer;transition:all .2s ease}
+        .language-switcher button:hover{color:var(--text-primary);background:rgba(255,255,255,.07)}
+        .language-switcher button.active{color:#fff;background:linear-gradient(135deg,var(--accent-blue),var(--accent-cyan));box-shadow:0 4px 14px rgba(59,130,246,.28)}
+        .language-switcher button:focus-visible{outline:2px solid var(--accent-cyan);outline-offset:2px}
+        @media(max-width:700px){.language-switcher{order:-1}.language-switcher button{min-width:30px;height:28px;padding:0 6px}.language-switcher .language-icon{display:none}}
+
 /* Arabic RTL presentation layer — no JavaScript/detection changes */
 html{direction:rtl}
 body{direction:rtl;text-align:right}
@@ -1413,6 +1423,16 @@ input[type="range"]{direction:ltr}
 </style>
 <style>
 .drowsiness-engine-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.risk-score-wrap{display:flex;align-items:center;gap:14px}.risk-ring{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;position:relative;flex:none;background:conic-gradient(var(--accent-green) 0deg,rgba(148,163,200,.12) 0deg)}.risk-ring:after{content:"";position:absolute;inset:7px;border-radius:50%;background:#0c1322}.risk-ring strong{position:relative;z-index:1;font-size:1.25rem}.risk-meta strong{display:block;font-size:.95rem}.risk-meta span{display:block;margin-top:4px;color:var(--text-secondary);font-size:.66rem}.risk-level{display:inline-flex;margin-top:8px;padding:5px 9px;border-radius:999px;font-size:.62rem;font-weight:900;border:1px solid var(--line-soft)}.risk-level.safe{color:#a7f3d0;background:rgba(52,211,153,.07)}.risk-level.low{color:#bfdbfe;background:rgba(59,130,246,.07)}.risk-level.moderate{color:#fde68a;background:rgba(245,158,11,.07)}.risk-level.high,.risk-level.critical{color:#fecaca;background:rgba(244,63,94,.08)}.engine-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.engine-metric{padding:9px;border-radius:10px;background:rgba(8,12,24,.32);border:1px solid rgba(148,163,200,.07)}.engine-metric small{display:block;color:var(--text-secondary);font-size:.54rem}.engine-metric b{display:block;margin-top:3px;font-size:.82rem;font-variant-numeric:tabular-nums}.confidence-bar{height:5px;border-radius:999px;background:rgba(148,163,200,.1);overflow:hidden;margin-top:8px}.confidence-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent-blue),var(--accent-cyan));transition:width .25s}.evidence-list{display:grid;gap:7px}.evidence-row{display:flex;justify-content:space-between;padding:8px 9px;border-radius:10px;background:rgba(8,12,24,.3);font-size:.63rem}.evidence-row span{color:var(--text-secondary)}.engine-state{margin-top:9px;padding:8px 10px;border-radius:10px;border:1px solid rgba(96,165,250,.13);background:rgba(59,130,246,.045);color:var(--text-secondary);font-size:.62rem;line-height:1.5}@media(max-width:760px){.drowsiness-engine-grid{grid-template-columns:1fr}.engine-metrics{grid-template-columns:repeat(2,1fr)}}
+
+/* ====== LANGUAGE DIRECTION OVERRIDES ====== */
+html[dir="ltr"]{direction:ltr}
+html[dir="ltr"] body{direction:ltr;text-align:left}
+html[dir="ltr"] .header,html[dir="ltr"] .sub,html[dir="ltr"] .top-tools,html[dir="ltr"] .driver-mode-header,html[dir="ltr"] .pro-card-header,html[dir="ltr"] .session-bar,html[dir="ltr"] .quick-guide,html[dir="ltr"] .stats-footer{direction:ltr}
+html[dir="ltr"] .header-left,html[dir="ltr"] .live-indicator,html[dir="ltr"] .tool-actions,html[dir="ltr"] .feature-card,html[dir="ltr"] .status-item,html[dir="ltr"] .settings-row,html[dir="ltr"] .settings-row label,html[dir="ltr"] .driver-mode-title,html[dir="ltr"] .driver-mode-toggle,html[dir="ltr"] .quality-row,html[dir="ltr"] .system-status,html[dir="ltr"] .alert-center,html[dir="ltr"] .session-actions,html[dir="ltr"] .account-data-actions,html[dir="ltr"] .auth-user-area,html[dir="ltr"] .auth-card-header{direction:ltr}
+html[dir="ltr"] .quick-guide-text,html[dir="ltr"] .privacy-panel,html[dir="ltr"] .account-data-note,html[dir="ltr"] .auth-message,html[dir="ltr"] .auth-privacy{ text-align:left}
+html[dir="ltr"] .history-item,html[dir="ltr"] .auth-card,html[dir="ltr"] .auth-field{text-align:left}
+html[dir="ltr"] .auth-field input,html[dir="ltr"] .auth-field input::placeholder{text-align:left}
+html[dir="ltr"] .auth-modal{direction:ltr}
 </style></head>
 <body>
 
@@ -2449,6 +2469,7 @@ window.addEventListener('beforeunload',()=>{if(sessionActive)stopSession(true);c
     sync();
 })();
 </script>
+<script src="./i18n.js"></script>
 
 </body>
 </html>
