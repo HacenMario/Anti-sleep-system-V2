@@ -1,6 +1,6 @@
 {
   "name": "anti-sleep-system-backend",
-  "version": "2.0.0",
+  "version": "2.3.0",
   "private": true,
   "main": "server.js",
   "scripts": {
@@ -20,6 +20,5 @@
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0"
-  },
-  "description": "Privacy-first Anti Sleep System backend with authentication and aggregated driver monitoring analytics."
+  }
 }
