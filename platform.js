@@ -168,9 +168,43 @@
     try{const res=await fetch('/api/auth/security',{credentials:'include'});if(res.ok){const d=await res.json();$('securityLogin').textContent=t('آخر دخول','Last login')+': '+fmtDate(d.lastLoginAt);}}catch(_){$('securityLogin').textContent=t('غير متاح حاليًا','Currently unavailable');}
   }
   async function healthCheck(){
-    const backend=$('backendHealthPlatform');try{const res=await fetch('/api/health',{credentials:'include',cache:'no-store'});const d=await res.json();backend.textContent=d.ok?t('متصل','Connected'):t('غير متاح','Unavailable');backend.className='platform-status '+(d.ok?'ok':'bad');}catch(_){backend.textContent=t('غير متاح','Unavailable');backend.className='platform-status bad';}
-    try{await openDB();$('idbHealthPlatform').textContent=t('جاهز','Ready');}catch(_){$('idbHealthPlatform').textContent=t('غير مدعوم','Unsupported');}
-    $('diagFpsPlatform').textContent=$('fpsValue')?.textContent||'--';$('diagQualityPlatform').textContent=$('qualityPercent')?.textContent||'--';$('diagEyePlatform').textContent=$('eyeState')?.textContent||'--';
+    const button=$('platformHealthCheck');
+    const backend=$('backendHealthPlatform');
+    const idb=$('idbHealthPlatform');
+    if(button){ button.disabled=true; button.setAttribute('aria-busy','true'); button.dataset.originalText=button.dataset.originalText||button.textContent; button.textContent='🩺 '+t('جارٍ الفحص…','Checking…'); }
+
+    try {
+      if(backend) backend.textContent=t('جارٍ الفحص…','Checking…');
+      const res=await fetch('/api/health',{credentials:'include',cache:'no-store',headers:{'Accept':'application/json'}});
+      const contentType=res.headers.get('content-type')||'';
+      if(!res.ok) throw new Error('HTTP '+res.status);
+      const d=contentType.includes('application/json') ? await res.json() : {};
+      if(backend){
+        const ok=d.ok !== false;
+        backend.textContent=ok?t('متصل','Connected'):t('غير متاح','Unavailable');
+        backend.className='platform-status '+(ok?'ok':'bad');
+      }
+    } catch (_) {
+      if(backend){ backend.textContent=t('غير متاح','Unavailable'); backend.className='platform-status bad'; }
+    }
+
+    try {
+      await openDB();
+      if(idb){ idb.textContent=t('جاهز','Ready'); idb.className='platform-status ok'; }
+    } catch (_) {
+      if(idb){ idb.textContent=t('غير مدعوم','Unsupported'); idb.className='platform-status bad'; }
+    }
+
+    const fps=$('diagFpsPlatform'), quality=$('diagQualityPlatform'), eye=$('diagEyePlatform');
+    if(fps) fps.textContent=$('fpsValue')?.textContent||'--';
+    if(quality) quality.textContent=$('qualityPercent')?.textContent||'--';
+    if(eye) eye.textContent=$('eyeState')?.textContent||'--';
+
+    if(button){
+      button.disabled=false;
+      button.removeAttribute('aria-busy');
+      button.textContent='🩺 '+t('فحص النظام','Run health check');
+    }
   }
   async function refreshAll(){await refreshQueueUI();refreshSettings();healthCheck();const ls=getLocalSessions();$('localSessionCount').textContent=String(ls.length);$('cameraHealthPlatform').textContent=$('cameraHealth')?.textContent||'--';$('faceHealthPlatform').textContent=$('faceHealth')?.textContent||'--';$('eyeHealthPlatform').textContent=$('eyeHealth')?.textContent||'--';$('audioHealthPlatform').textContent=$('audioHealth')?.textContent||'--';}
 
@@ -184,8 +218,9 @@
     $('platformBtn')?.addEventListener('click',()=>openPlatform('overview'));$('platformClose')?.addEventListener('click',closePlatform);$('platformModal')?.addEventListener('click',e=>{if(e.target.id==='platformModal')closePlatform();});
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closePlatform();});document.querySelectorAll('.platform-tab').forEach(b=>b.addEventListener('click',()=>activatePage(b.dataset.page)));
     $('platformSyncBtn')?.addEventListener('click',()=>syncQueue());$('platformInstallBtn')?.addEventListener('click',()=>document.getElementById('installBtn')?.click());$('platformFullscreenBtn')?.addEventListener('click',()=>{if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.();});
-    $('platformExportJson')?.addEventListener('click',exportData);$('platformPrintReport')?.addEventListener('click',printReport);$('platformOpenSettings')?.addEventListener('click',()=>{closePlatform();document.querySelector('.settings-row')?.scrollIntoView({behavior:'smooth',block:'center'});});$('platformCompactBtn')?.addEventListener('click',()=>document.getElementById('compactBtn')?.click());$('platformHealthCheck')?.addEventListener('click',healthCheck);$('changePasswordBtn')?.addEventListener('click',changePassword);$('platformLogoutAll')?.addEventListener('click',logoutAll);$('platformClearLocal')?.addEventListener('click',async()=>{if(confirm(t('مسح بيانات المنصة المحلية؟ لن يحذف جلسات Cloud.','Clear local platform data? Cloud sessions will not be deleted.'))){try{const db=await openDB();await new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});localStorage.removeItem('antiSleepPlatformNotifications');await refreshQueueUI();notify(t('تم مسح بيانات المنصة المحلية','Local platform data cleared'));}catch(_){}}});
-    window.addEventListener('online',syncQueue);window.addEventListener('antiSleepLanguageChanged',()=>setTimeout(refreshAll,50));
+    $('platformExportJson')?.addEventListener('click',exportData);$('platformPrintReport')?.addEventListener('click',printReport);$('platformOpenSettings')?.addEventListener('click',()=>{closePlatform();document.querySelector('.settings-row')?.scrollIntoView({behavior:'smooth',block:'center'});});$('platformCompactBtn')?.addEventListener('click',()=>document.getElementById('compactBtn')?.click());$('changePasswordBtn')?.addEventListener('click',changePassword);$('platformLogoutAll')?.addEventListener('click',logoutAll);$('platformClearLocal')?.addEventListener('click',async()=>{if(confirm(t('مسح بيانات المنصة المحلية؟ لن يحذف جلسات Cloud.','Clear local platform data? Cloud sessions will not be deleted.'))){try{const db=await openDB();await new Promise((resolve,reject)=>{const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).clear();tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});localStorage.removeItem('antiSleepPlatformNotifications');await refreshQueueUI();notify(t('تم مسح بيانات المنصة المحلية','Local platform data cleared'));}catch(_){}}});
+    document.addEventListener('click',event=>{const target=event.target?.closest?.('#platformHealthCheck');if(target) healthCheck();});
+    window.addEventListener('online',syncQueue);window.addEventListener('antiSleepLanguageChanged',()=>{ const lang=window.getAntiSleepLanguage?.()||'ar'; const modal=$('platformModal'); if(modal){ modal.dir=lang==='ar'?'rtl':'ltr'; modal.style.setProperty('direction',lang==='ar'?'rtl':'ltr','important'); } setTimeout(refreshAll,50); });
     setInterval(()=>{if($('platformModal')?.classList.contains('show')){refreshSettings();$('diagFpsPlatform').textContent=$('fpsValue')?.textContent||'--';$('diagQualityPlatform').textContent=$('qualityPercent')?.textContent||'--';$('diagEyePlatform').textContent=$('eyeState')?.textContent||'--';}},1000);
   }
 
