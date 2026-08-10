@@ -13,7 +13,7 @@ const app = express();
 const PORT = Number(process.env.PORT || 3000);
 const MONGODB_URI = process.env.MONGODB_URI;
 const JWT_SECRET = process.env.JWT_SECRET;
-const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'http://localhost:3000';
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || 'https://anti-sleep-system-v2.vercel.app';
 const COOKIE_SECURE = process.env.NODE_ENV === 'production';
 const COOKIE_SAMESITE = process.env.COOKIE_SAMESITE || 'lax';
 const APP_VERSION = process.env.APP_VERSION || '2.3-platform';
