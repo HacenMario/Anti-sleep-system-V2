@@ -1349,6 +1349,23 @@
 /* Arabic RTL presentation layer — no JavaScript/detection changes */
 html{direction:rtl}
 body{direction:rtl;text-align:right}
+html[dir="ltr"]{direction:ltr}
+html[dir="ltr"] body{direction:ltr;text-align:left}
+html[dir="ltr"] .app{direction:ltr}
+html[dir="ltr"] .header,html[dir="ltr"] .sub,html[dir="ltr"] .top-tools,html[dir="ltr"] .driver-mode-header,html[dir="ltr"] .pro-card-header,html[dir="ltr"] .session-bar,html[dir="ltr"] .quick-guide,html[dir="ltr"] .stats-footer{direction:ltr}
+html[dir="ltr"] .header-left,html[dir="ltr"] .live-indicator,html[dir="ltr"] .tool-actions,html[dir="ltr"] .feature-card,html[dir="ltr"] .status-item,html[dir="ltr"] .settings-row,html[dir="ltr"] .settings-row label,html[dir="ltr"] .stats-footer .stat-group,html[dir="ltr"] .driver-mode-title,html[dir="ltr"] .driver-mode-toggle,html[dir="ltr"] .quality-row,html[dir="ltr"] .system-status,html[dir="ltr"] .alert-center,html[dir="ltr"] .session-actions,html[dir="ltr"] .account-data-actions,html[dir="ltr"] .auth-user-area,html[dir="ltr"] .auth-card-header{direction:ltr}
+html[dir="ltr"] .header-left{text-align:left}
+html[dir="ltr"] .header-badge{flex-direction:row}
+html[dir="ltr"] .sub .stats-mini{direction:ltr}
+html[dir="ltr"] .quick-guide-text,html[dir="ltr"] .privacy-panel,html[dir="ltr"] .account-data-note,html[dir="ltr"] .auth-message,html[dir="ltr"] .auth-privacy{text-align:left}
+html[dir="ltr"] .history-item{text-align:left;direction:ltr}
+html[dir="ltr"] .auth-modal{direction:ltr}
+html[dir="ltr"] .auth-card{text-align:left}
+html[dir="ltr"] .auth-tabs{direction:ltr}
+html[dir="ltr"] .auth-field{text-align:left}
+html[dir="ltr"] .auth-field input{text-align:left}
+html[dir="ltr"] .auth-submit,html[dir="ltr"] .auth-logout,html[dir="ltr"] .account-data-btn,html[dir="ltr"] .tool-btn,html[dir="ltr"] .btn,html[dir="ltr"] .small-btn{direction:ltr}
+
 .app{direction:rtl}
 .header,.sub,.top-tools,.driver-mode-header,.pro-card-header,.session-bar,.quick-guide,.stats-footer{direction:rtl}
 .header-left,.live-indicator,.tool-actions,.feature-card,.status-item,.settings-row,.settings-row label,.stats-footer .stat-group,.driver-mode-title,.driver-mode-toggle,.quality-row,.system-status,.alert-center,.session-actions,.account-data-actions,.auth-user-area,.auth-card-header{direction:rtl}
@@ -1451,15 +1468,124 @@ input[type="range"]{direction:ltr}
         @media(max-width:760px){.risk-main{grid-template-columns:1fr}.risk-ring{margin:auto}.risk-factors{grid-template-columns:repeat(2,1fr)}.telemetry-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:420px){.risk-factors{grid-template-columns:1fr 1fr}.telemetry-grid{grid-template-columns:1fr 1fr}.risk-card{padding:11px}}
 
+        .language-switcher{display:inline-flex;align-items:center;gap:4px;padding:4px 5px;border:1px solid rgba(148,163,200,.16);background:rgba(8,12,24,.38);border-radius:11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.03)}
+        .language-switcher .language-icon{font-size:.8rem;opacity:.85;padding:0 2px}
+        .language-switcher button{border:0;background:transparent;color:var(--text-secondary);font:800 .62rem/1 var(--font);padding:6px 7px;border-radius:7px;cursor:pointer;transition:all .2s ease;letter-spacing:.02em}
+        .language-switcher button:hover{color:var(--text-primary);background:rgba(59,130,246,.12)}
+        .language-switcher button.active{color:#fff;background:linear-gradient(135deg,rgba(59,130,246,.9),rgba(34,211,238,.65));box-shadow:0 4px 14px rgba(59,130,246,.22)}
+        html[dir="ltr"] .language-switcher{direction:ltr}
+        @media(max-width:760px){.language-switcher{order:3}.tool-actions{width:100%}.tool-actions .language-switcher{margin-inline-start:auto}}
+
     
-        /* ====== PLATFORM ENHANCEMENT LAYER ====== */
-        .language-switcher{display:inline-flex;align-items:center;gap:3px;padding:3px;border:1px solid var(--line-soft);background:rgba(26,35,50,.68);border-radius:10px}
-        .language-switcher .language-icon{font-size:.8rem;padding:0 3px}
-        .language-switcher button{border:0;background:transparent;color:var(--text-secondary);border-radius:7px;padding:5px 7px;cursor:pointer;font-size:.65rem;font-weight:900}
-        .language-switcher button.active{background:rgba(59,130,246,.18);color:var(--text-primary);box-shadow:inset 0 0 0 1px rgba(96,165,250,.16)}
-        .language-switcher button:hover{color:var(--text-primary)}
-        @media(max-width:760px){.language-switcher{order:5}.tool-actions{flex-wrap:wrap}}
-</style>
+/* FINAL RTL/LTR OVERRIDE — UI PRESENTATION ONLY */
+/*
+  The detection engine, MediaPipe, EAR calculation and alarm logic are untouched.
+  This layer only makes the visual direction follow <html dir="..."> correctly.
+*/
+html[dir="ltr"] body,
+html[dir="ltr"] .app {
+    direction: ltr !important;
+    text-align: left;
+}
+
+/* Some older UI rules explicitly forced RTL. Override them for FR/EN. */
+html[dir="ltr"] .app *,
+html[dir="ltr"] .app *::before,
+html[dir="ltr"] .app *::after {
+    direction: ltr;
+}
+
+/* Keep media/numeric elements in their natural LTR presentation. */
+html[dir="ltr"] #video,
+html[dir="ltr"] #output,
+html[dir="ltr"] canvas,
+html[dir="ltr"] input[type="range"],
+html[dir="ltr"] .status-value,
+html[dir="ltr"] #timerDisplay,
+html[dir="ltr"] #distanceDisplay,
+html[dir="ltr"] #earDisplay,
+html[dir="ltr"] #alarmCountdown,
+html[dir="ltr"] #sessionTimer,
+html[dir="ltr"] .metric-value,
+html[dir="ltr"] .session-clock,
+html[dir="ltr"] .range-value {
+    direction: ltr !important;
+}
+
+/* Text alignment for all major LTR panels. */
+html[dir="ltr"] .app,
+html[dir="ltr"] .app .header,
+html[dir="ltr"] .app .sub,
+html[dir="ltr"] .app .feature-card,
+html[dir="ltr"] .app .pro-card,
+html[dir="ltr"] .app .driver-mode-card,
+html[dir="ltr"] .app .privacy-panel,
+html[dir="ltr"] .app .quick-guide,
+html[dir="ltr"] .app .settings-row,
+html[dir="ltr"] .app .history-card,
+html[dir="ltr"] .app .auth-card {
+    text-align: left;
+}
+
+/* Flex rows should start from the English/French left side. */
+html[dir="ltr"] .header,
+html[dir="ltr"] .sub,
+html[dir="ltr"] .top-tools,
+html[dir="ltr"] .feature-strip,
+html[dir="ltr"] .controls,
+html[dir="ltr"] .settings-row,
+html[dir="ltr"] .stats-footer,
+html[dir="ltr"] .driver-mode-header,
+html[dir="ltr"] .session-bar,
+html[dir="ltr"] .quick-guide,
+html[dir="ltr"] .account-data-actions,
+html[dir="ltr"] .auth-user-area,
+html[dir="ltr"] .auth-card-header,
+html[dir="ltr"] .tool-actions,
+html[dir="ltr"] .language-switcher {
+    direction: ltr !important;
+}
+
+/* Restore the intended left alignment for LTR text blocks. */
+html[dir="ltr"] .header-left,
+html[dir="ltr"] .quick-guide-text,
+html[dir="ltr"] .privacy-panel,
+html[dir="ltr"] .account-data-note,
+html[dir="ltr"] .auth-message,
+html[dir="ltr"] .auth-privacy,
+html[dir="ltr"] .history-item,
+html[dir="ltr"] .auth-field,
+html[dir="ltr"] .auth-field input {
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+/* Auth area had an explicit RTL rule in the original UI. */
+html[dir="ltr"] .auth-user-area {
+    direction: ltr !important;
+}
+
+/* Warning overlay follows the selected language too. */
+html[dir="ltr"] .drowsiness-warning-overlay,
+html[dir="ltr"] .drowsiness-warning-card,
+html[dir="ltr"] .drowsiness-warning-content {
+    direction: ltr !important;
+    text-align: left;
+}
+
+/* Language selector itself is always a stable LTR control. */
+.language-switcher {
+    direction: ltr !important;
+    unicode-bidi: isolate;
+}
+
+/* Arabic remains RTL through the existing RTL layer. */
+html[dir="rtl"] body,
+html[dir="rtl"] .app {
+    direction: rtl;
+}
+
+    </style>
 </head>
 <body>
 
@@ -1811,6 +1937,9 @@ input[type="range"]{direction:ltr}
         </div>
     </div>
 
+    <!-- ====== INTERNATIONALIZATION ====== -->
+    <script src="./i18n.js"></script>
+
     <!-- ====== MEDIAPIPE ====== -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous">
     </script>
@@ -1914,7 +2043,7 @@ input[type="range"]{direction:ltr}
                     event.preventDefault();
                     setFullscreen();
                 }
-                if (typeof event.key === 'string' && event.key.toLowerCase() === 'c' && !event.ctrlKey && !event.altKey && !event.metaKey) {
+                if (event.key.toLowerCase() === 'c' && !event.ctrlKey && !event.altKey && !event.metaKey) {
                     compactBtn?.click();
                 }
             });
@@ -1928,6 +2057,7 @@ input[type="range"]{direction:ltr}
             let faceMesh = null;
             let isRunning = false;
             let isMuted = false;
+            window.__antiSleepAudioMuted = false;
             let alarmLevel = 0;
 
             let stats = {
@@ -1946,6 +2076,12 @@ input[type="range"]{direction:ltr}
             let calibrationStartedAt = 0;
             let calibrationSamples = [];
             const CALIBRATION_MS = 8000;
+            // Anti-false-alarm state machine: require sustained evidence before alarming.
+            let alarmCandidateSince = 0;
+            let eyeRecoverySince = 0;
+            const MIN_ALARM_CLOSURE_SEC = 0.9;
+            const ALARM_CONFIRM_MS = 900;
+            const ALARM_RECOVERY_MS = 350;
 
             const telemetry = window.__antiSleepTelemetry = window.__antiSleepTelemetry || {
                 faceDetected:false, leftEar:null, rightEar:null, avgEar:null,
@@ -2060,6 +2196,7 @@ input[type="range"]{direction:ltr}
             function resumeAudioContext(){ if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); }
             function toggleMute(){
                 isMuted=!isMuted;
+                window.__antiSleepAudioMuted = isMuted;
                 muteBtn.textContent=isMuted?'🔇 مكتوم':'🔊 غير مكتوم';
                 muteBtn.classList.toggle('muted',isMuted);
                 if(isMuted) stopAlarm();
@@ -2166,19 +2303,42 @@ input[type="range"]{direction:ltr}
                         timerDisplay.textContent=closedDuration.toFixed(1)+' ث';
                         eyeStateEl.textContent='😴 مغلقة';eyeStateEl.className='status-value closed';
                         updateCountdown(closedDuration);
+                        const now=performance.now();
                         const riskNow=Number(telemetry.riskScore)||0;
-                        if(closedDuration>DROWSY_LIMIT){
-                            const level=riskNow>=82||closedDuration>=DROWSY_LIMIT+2?3:(riskNow>=60||closedDuration>=DROWSY_LIMIT+1?2:1);
-                            playAlarm(level);
-                            alarmDurationDisplay.textContent=((performance.now()-blinkStartTime)/1000).toFixed(1)+'ث';
-                        }else stopAlarm();
+                        const effectiveLimit=Math.max(Number(DROWSY_LIMIT)||2,MIN_ALARM_CLOSURE_SEC);
+                        const qualityOk=faceQuality>=50 && Math.abs(pose.yaw)<=38 && Math.abs(pose.pitch)<=35;
+                        const strongEvidence=riskNow>=50 || closedDuration>=effectiveLimit+0.75 || (Number(telemetry.perclos)||0)>=12;
+                        if(closedDuration>=effectiveLimit && qualityOk && strongEvidence){
+                            if(!alarmCandidateSince) alarmCandidateSince=now;
+                            const confirmed=(now-alarmCandidateSince)>=ALARM_CONFIRM_MS || closedDuration>=effectiveLimit+1.5;
+                            if(confirmed){
+                                const level=riskNow>=82||closedDuration>=effectiveLimit+2?3:(riskNow>=60||closedDuration>=effectiveLimit+1?2:1);
+                                playAlarm(level);
+                                alarmDurationDisplay.textContent=((now-blinkStartTime)/1000).toFixed(1)+'ث';
+                            }else{
+                                stopAlarm();
+                            }
+                        }else{
+                            alarmCandidateSince=0;
+                            stopAlarm();
+                        }
+                        eyeRecoverySince=0;
                         telemetry.closureDuration=closedDuration;
                     }else{
                         if(isClosed){
                             const duration=(performance.now()-blinkStartTime)/1000;
                             if(duration>0.1){stats.durations.push(duration);stats.maxDuration=Math.max(stats.maxDuration,duration);updateStatsUI();}
                         }
-                        isClosed=false;stopAlarm();timerDisplay.textContent='0.0 ث';
+                        isClosed=false;
+                        alarmCandidateSince=0;
+                        if(alarmWarning.classList.contains('show')){
+                            if(!eyeRecoverySince) eyeRecoverySince=performance.now();
+                            if(performance.now()-eyeRecoverySince>=ALARM_RECOVERY_MS) stopAlarm();
+                        }else{
+                            eyeRecoverySince=0;
+                            stopAlarm();
+                        }
+                        timerDisplay.textContent='0.0 ث';
                         eyeStateEl.textContent='👁️ مفتوحة';eyeStateEl.className='status-value';
                         alarmCountdown.textContent='--';alarmDurationDisplay.textContent='';updateCountdown(0);
                         telemetry.closureDuration=0;
@@ -2207,7 +2367,7 @@ input[type="range"]{direction:ltr}
                     const duration=(performance.now()-blinkStartTime)/1000;
                     if(duration>0.1){stats.durations.push(duration);stats.maxDuration=Math.max(stats.maxDuration,duration);updateStatsUI();}
                 }
-                isClosed=false;stopAlarm();timerDisplay.textContent='0.0 ث';eyeStateEl.textContent='👁️ مفتوحة';eyeStateEl.className='status-value';alarmCountdown.textContent='--';alarmDurationDisplay.textContent='';updateCountdown(0);
+                isClosed=false;alarmCandidateSince=0;eyeRecoverySince=0;stopAlarm();timerDisplay.textContent='0.0 ث';eyeStateEl.textContent='👁️ مفتوحة';eyeStateEl.className='status-value';alarmCountdown.textContent='--';alarmDurationDisplay.textContent='';updateCountdown(0);
                 telemetry.closed=false;telemetry.closureDuration=0;
             }
 
@@ -2386,22 +2546,44 @@ window.showToast=showToast;
 function drawChart(){if(!chartCtx||!chart)return;const w=chart.width,h=chart.height;chartCtx.clearRect(0,0,w,h);chartCtx.strokeStyle='rgba(148,163,200,.10)';chartCtx.lineWidth=1;for(let i=1;i<5;i++){const y=h/5*i;chartCtx.beginPath();chartCtx.moveTo(0,y);chartCtx.lineTo(w,y);chartCtx.stroke();}if(earData.length<2){if(chartEmpty)chartEmpty.style.display='grid';return;}if(chartEmpty)chartEmpty.style.display='none';const min=.05,max=.45;chartCtx.beginPath();earData.forEach((v,i)=>{const x=i/(Math.max(1,earData.length-1))*w,y=h-((Math.min(max,Math.max(min,v))-min)/(max-min))*h;i?chartCtx.lineTo(x,y):chartCtx.moveTo(x,y);});chartCtx.strokeStyle='#22d3ee';chartCtx.lineWidth=2;chartCtx.stroke();const threshold=Number(telemetry.adaptiveThreshold||$('earThresholdSlider')?.value||.12),ty=h-((threshold-min)/(max-min))*h;chartCtx.setLineDash([5,5]);chartCtx.strokeStyle='rgba(244,63,94,.55)';chartCtx.beginPath();chartCtx.moveTo(0,ty);chartCtx.lineTo(w,ty);chartCtx.stroke();chartCtx.setLineDash([]);}
 function addEarSample(v){if(!Number.isFinite(v))return;earData.push(v);if(earData.length>60)earData.shift();minEar=Math.min(minEar,v);earSum+=v;earSamples++;$('analyticsEar').textContent=v.toFixed(3);$('minEar').textContent=minEar.toFixed(3);$('avgEar').textContent=(earSum/earSamples).toFixed(3);drawChart();}
 function computePerclos(now){perclosSamples.push({t:now,closed:!!telemetry.closed});const cutoff=now-60000;while(perclosSamples.length&&perclosSamples[0].t<cutoff)perclosSamples.shift();if(!perclosSamples.length)return 0;const closed=perclosSamples.reduce((n,x)=>n+(x.closed?1:0),0);return closed/perclosSamples.length*100;}
-function computeRisk(perclos){const ear=Number(telemetry.avgEar),threshold=Number(telemetry.adaptiveThreshold||$('earThresholdSlider')?.value||.12),closure=Number(telemetry.closureDuration)||0,pitch=Math.abs(Number(telemetry.pitch)||0);let score=0;if(Number.isFinite(ear)){if(ear<threshold)score+=Math.min(42,(threshold-ear)/Math.max(.02,threshold)*42);}score+=Math.min(30,Math.max(0,(perclos-4)*1.25));if(closure>0)score+=Math.min(28,closure>2?(closure-1)*14:closure*7);if(pitch>10)score+=Math.min(15,(pitch-10)*.6);if(!telemetry.faceDetected)score=Math.min(score,25);return Math.round(Math.max(0,Math.min(100,score)));}
+let riskEma=0;
+function computeRisk(perclos){
+    const ear=Number(telemetry.avgEar),threshold=Number(telemetry.adaptiveThreshold||$('earThresholdSlider')?.value||.12);
+    const closure=Number(telemetry.closureDuration)||0;
+    const pitch=Math.abs(Number(telemetry.pitch)||0);
+    const yaw=Math.abs(Number(telemetry.yaw)||0);
+    const faceQuality=Number(telemetry.faceQuality)||0;
+    const blinkRate=Number(telemetry.blinkRate)||0;
+    let score=0;
+    if(Number.isFinite(ear) && ear<threshold) score+=Math.min(38,(threshold-ear)/Math.max(.02,threshold)*38);
+    score+=Math.min(26,Math.max(0,(perclos-4)*1.1));
+    if(closure>0) score+=Math.min(25,closure>2?(closure-1)*12.5:closure*6.5);
+    if(pitch>10) score+=Math.min(16,(pitch-10)*.65);
+    if(pitch>20) score+=4;
+    if(blinkRate>0 && blinkRate<6 && perclos>5) score+=6;
+    // Poor tracking lowers confidence instead of creating a false danger signal.
+    if(!telemetry.faceDetected) score=Math.min(score,20);
+    if(faceQuality>0 && faceQuality<50) score*=0.55;
+    if(yaw>38) score*=0.65;
+    score=Math.max(0,Math.min(100,score));
+    riskEma=riskEma===0?score:(riskEma*0.65+score*0.35);
+    return Math.round(Math.max(0,Math.min(100,riskEma)));
+}
 function riskLabel(score){if(score>=80)return ['CRITICAL','critical'];if(score>=60)return ['HIGH','high'];if(score>=40)return ['MODERATE','moderate'];if(score>=20)return ['LOW','low'];return ['SAFE','safe'];}
 function updateRisk(now){const perclos=computePerclos(now);const score=computeRisk(perclos);telemetry.perclos=perclos;telemetry.riskScore=score;const state=riskLabel(score),stateEl=$('riskState');if(stateEl){stateEl.textContent=state[0];stateEl.className='risk-state '+state[1];}const ring=$('riskRing');if(ring)ring.style.background=`conic-gradient(${score>=80?'var(--accent-rose)':score>=40?'var(--accent-amber)':'var(--accent-green)'} ${score*3.6}deg,rgba(148,163,200,.1) ${score*3.6}deg)`;$('riskScore').textContent=score;$('riskProgress').style.width=score+'%';$('riskEar').textContent=Number.isFinite(Number(telemetry.avgEar))?Number(telemetry.avgEar).toFixed(3):'--';$('riskPerclos').textContent=perclos.toFixed(1)+'%';$('riskClosure').textContent=(Number(telemetry.closureDuration)||0).toFixed(1)+'ث';const pitch=Number(telemetry.pitch)||0,yaw=Number(telemetry.yaw)||0;$('riskYaw').textContent=(yaw>=0?'+':'')+yaw.toFixed(0)+'°';$('riskPitch').textContent=(pitch>=0?'+':'')+pitch.toFixed(0)+'°';$('riskHead').textContent=Math.abs(pitch)>12?'منخفض ⚠️':Math.abs(yaw)>30?'مدار ↔':'مستقيم';$('leftEarValue').textContent=Number.isFinite(Number(telemetry.leftEar))?Number(telemetry.leftEar).toFixed(3):'--';$('rightEarValue').textContent=Number.isFinite(Number(telemetry.rightEar))?Number(telemetry.rightEar).toFixed(3):'--';$('faceQualityValue').textContent=Number.isFinite(Number(telemetry.faceQuality))?Number(telemetry.faceQuality)+'%':'--';$('adaptiveThresholdLabel').textContent='عتبة تكيفية: '+(Number.isFinite(Number(telemetry.adaptiveThreshold))?Number(telemetry.adaptiveThreshold).toFixed(3):'--');}
 function updateBlinkRate(now){const current=parseInt($('totalBlinks')?.textContent||'0',10)||0;if(current!==lastBlinkCount){for(let i=lastBlinkCount;i<current;i++)blinkWindow.push(now);lastBlinkCount=current;}const cutoff=now-60000;while(blinkWindow.length&&blinkWindow[0]<cutoff)blinkWindow.shift();$('blinkRateValue').textContent=blinkWindow.length+' / دقيقة';telemetry.blinkRate=blinkWindow.length;}
-function updateQuality(){const running=statusLabel?.textContent==='تشغيل',hasFace=!!telemetry.faceDetected,ear=Number(telemetry.avgEar);let score=0;if(running)score+=20;if(hasFace)score+=35;if(Number.isFinite(ear))score+=30;if(video&&video.readyState>=2)score+=15;score=Math.min(100,score);const ring=$('qualityRing');if(ring)ring.style.background=`conic-gradient(var(--accent-green) ${score*3.6}deg,rgba(148,163,200,.12) ${score*3.6}deg)`;$('qualityPercent').textContent=score+'%';$('qualityProgress').style.width=score+'%';let label='في انتظار الكاميرا',detail='ابدأ النظام للحصول على تقييم التتبع.';if(score>=85){label='ممتاز';detail='الوجه والعينان قيد التتبع بشكل مستقر.'}else if(score>=55){label='جيد';detail='التتبع يعمل، حافظ على إضاءة ومسافة ثابتة.'}else if(running){label='يحتاج تحسين';detail='ضع الوجه داخل الإطار وتأكد من الإضاءة.'}$('qualityLabel').textContent=label;$('qualityDetail').textContent=detail;setHealth('cameraHealth',running?'متصل':'جاهز',running?'ok':'');setHealth('faceHealth',hasFace?'مكتشف':'انتظار',hasFace?'ok':'warn');setHealth('eyeHealth',Number.isFinite(ear)?'مستقر':'انتظار',Number.isFinite(ear)?'ok':'warn');setHealth('audioHealth',muteBtn?.textContent.includes('مكتوم')?'مكتوم':'جاهز',muteBtn?.textContent.includes('مكتوم')?'warn':'ok');}
+function updateQuality(){const running=!!video?.srcObject && !!video && video.readyState>=2,hasFace=!!telemetry.faceDetected,ear=Number(telemetry.avgEar);let score=0;if(running)score+=20;if(hasFace)score+=35;if(Number.isFinite(ear))score+=30;if(video&&video.readyState>=2)score+=15;score=Math.min(100,score);const ring=$('qualityRing');if(ring)ring.style.background=`conic-gradient(var(--accent-green) ${score*3.6}deg,rgba(148,163,200,.12) ${score*3.6}deg)`;$('qualityPercent').textContent=score+'%';$('qualityProgress').style.width=score+'%';let label='في انتظار الكاميرا',detail='ابدأ النظام للحصول على تقييم التتبع.';if(score>=85){label='ممتاز';detail='الوجه والعينان قيد التتبع بشكل مستقر.'}else if(score>=55){label='جيد';detail='التتبع يعمل، حافظ على إضاءة ومسافة ثابتة.'}else if(running){label='يحتاج تحسين';detail='ضع الوجه داخل الإطار وتأكد من الإضاءة.'}$('qualityLabel').textContent=label;$('qualityDetail').textContent=detail;setHealth('cameraHealth',running?'متصل':'جاهز',running?'ok':'');setHealth('faceHealth',hasFace?'مكتشف':'انتظار',hasFace?'ok':'warn');setHealth('eyeHealth',Number.isFinite(ear)?'مستقر':'انتظار',Number.isFinite(ear)?'ok':'warn');setHealth('audioHealth',window.__antiSleepAudioMuted?'مكتوم':'جاهز',window.__antiSleepAudioMuted?'warn':'ok');}
 function tick(){updateSessionTimer();const now=performance.now(),ear=Number(telemetry.avgEar);if(Number.isFinite(ear))addEarSample(ear);updateRisk(now);updateBlinkRate(now);updateQuality();fpsFrames++;if(now-fpsLast>=1000){fps=fpsFrames;fpsFrames=0;fpsLast=now;$('fpsValue').textContent=fps+' FPS';}const alarming=!!alarmWarning?.classList.contains('show');if(alarming&&!lastAlarmState){sessionAlarmCount++;lastAlarmStart=Date.now();lastAlertText=formatDateTime();$('lastAlert').textContent=lastAlertText;$('sessionAlerts').textContent=sessionAlarmCount;}if(!alarming&&lastAlarmState&&lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';}lastAlarmState=alarming;}
 function startSession(){if(sessionActive)return;sessionStart=Date.now();sessionActive=true;showToast('تم بدء جلسة المراقبة');}
 function stopSession(save=true){if(!sessionActive&&!sessionStart)return;sessionElapsedBeforePause=sessionSeconds();sessionActive=false;sessionStart=null;if(lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;}$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';if(save&&sessionElapsedBeforePause>=1)saveSession();showToast('تم إنهاء جلسة المراقبة');}
-function resetSessionMetrics(){sessionStart=null;sessionElapsedBeforePause=0;sessionActive=false;sessionAlarmCount=0;sessionAlertSeconds=0;lastAlarmStart=null;lastAlarmState=false;earData.length=0;perclosSamples=[];blinkWindow=[];minEar=Infinity;earSum=0;earSamples=0;lastBlinkCount=0;telemetry.perclos=0;telemetry.riskScore=0;$('sessionAlerts').textContent='0';$('lastAlert').textContent='--';$('totalAlertTime').textContent='0.0 ث';$('riskScore').textContent='0';$('riskPerclos').textContent='0%';updateSessionTimer();drawChart();}
+function resetSessionMetrics(){sessionStart=null;sessionElapsedBeforePause=0;sessionActive=false;sessionAlarmCount=0;sessionAlertSeconds=0;lastAlarmStart=null;lastAlarmState=false;earData.length=0;perclosSamples=[];blinkWindow=[];minEar=Infinity;earSum=0;earSamples=0;lastBlinkCount=0;telemetry.perclos=0;telemetry.riskScore=0;riskEma=0;$('sessionAlerts').textContent='0';$('lastAlert').textContent='--';$('totalAlertTime').textContent='0.0 ث';$('riskScore').textContent='0';$('riskPerclos').textContent='0%';updateSessionTimer();drawChart();}
 window.loadHistory=function loadHistory(){let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}const box=$('historyList');if(!box)return;if(!list.length){box.innerHTML='<div class="empty-history">لا توجد جلسات محفوظة بعد.</div>';return;}box.innerHTML=list.slice(0,12).map(x=>`<div class="history-item"><strong>${x.date}</strong><span>${formatTime(x.duration)}</span><span>🚨 ${x.alerts} • EAR ${x.avgEar||'--'} • Risk ${x.riskScore??'--'}</span></div>`).join('');}
 function saveSession(){const avg=earSamples?(earSum/earSamples).toFixed(3):'--',item={date:formatDateTime(),duration:Math.round(sessionElapsedBeforePause),alerts:sessionAlarmCount,alertSeconds:Number(sessionAlertSeconds.toFixed(1)),avgEar:avg,minEar:minEar===Infinity?'--':minEar.toFixed(3),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)};let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}list.unshift(item);localStorage.setItem('antiSleepSessions',JSON.stringify(list.slice(0,30)));loadHistory();if(typeof window.__antiSleepSaveRemoteSession==='function'){window.__antiSleepSaveRemoteSession({durationSeconds:Math.max(1,Math.round(sessionElapsedBeforePause)),alertCount:Math.max(0,Math.round(sessionAlarmCount)),alertSeconds:Math.max(0,Number(sessionAlertSeconds.toFixed(1))),completed:true,avgEar:Number.isFinite(Number(avg))?Number(avg):null,minEar:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)});}}
-function exportReport(){const report={application:'Anti Sleep System by MADOUNINE HACENE',version:'2.0',exportedAt:formatDateTime(),sessionDurationSeconds:Math.round(sessionSeconds()),sessionDuration:formatTime(sessionSeconds()),sessionAlerts:sessionAlarmCount,totalAlertSeconds:Number(sessionAlertSeconds.toFixed(1)),totalAlarms:parseInt(alarmCountEl?.textContent||'0',10)||0,averageEAR:earSamples?(earSum/earSamples).toFixed(3):null,minimumEAR:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0),blinkRate:Number(telemetry.blinkRate||0),approximateFPS:fps||null,privacy:'Processed locally in the browser; only aggregated session summaries may be synced.'};const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='anti-sleep-session-report.json';a.click();URL.revokeObjectURL(a.href);showToast('تم تصدير تقرير الجلسة');}
+function exportReport(){const report={application:'Anti Sleep System by MADOUNINE HACENE',version:'2.1',exportedAt:formatDateTime(),sessionDurationSeconds:Math.round(sessionSeconds()),sessionDuration:formatTime(sessionSeconds()),sessionAlerts:sessionAlarmCount,totalAlertSeconds:Number(sessionAlertSeconds.toFixed(1)),totalAlarms:parseInt(alarmCountEl?.textContent||'0',10)||0,averageEAR:earSamples?(earSum/earSamples).toFixed(3):null,minimumEAR:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0),blinkRate:Number(telemetry.blinkRate||0),approximateFPS:fps||null,privacy:'Processed locally in the browser; only aggregated session summaries may be synced.'};const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='anti-sleep-session-report.json';a.click();URL.revokeObjectURL(a.href);showToast('تم تصدير تقرير الجلسة');}
 function updateNetwork(){const b=$('networkBadge');if(!b)return;if(navigator.onLine){b.textContent='● متصل';b.classList.remove('offline')}else{b.textContent='● وضع عدم الاتصال';b.classList.add('offline')}}
 function updateSW(){if(!('serviceWorker'in navigator)){setHealth('swHealth','غير مدعوم','bad');setHealth('offlineHealth','غير متاح','bad');return;}navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{setHealth('swHealth','نشط','ok');setHealth('offlineHealth','جاهز','ok')}).catch(()=>{setHealth('swHealth','خطأ','bad');setHealth('offlineHealth','غير مؤكد','warn')});}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;$('installBtn')?.classList.add('install-btn','show')});$('installBtn')?.addEventListener('click',async()=>{if(!deferredInstallPrompt){showToast('التطبيق مثبت أو التثبيت غير متاح حاليًا');return;}deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$('installBtn')?.classList.remove('show')});window.addEventListener('appinstalled',()=>{showToast('تم تثبيت Anti Sleep System بنجاح');$('installBtn')?.classList.remove('show')});
-$('exportBtn')?.addEventListener('click',exportReport);$('clearHistoryBtn')?.addEventListener('click',()=>{if(confirm('هل تريد حذف سجل الجلسات المحفوظ محليًا؟')){localStorage.removeItem('antiSleepSessions');loadHistory();showToast('تم حذف سجل الجلسات')}});
+$('exportBtn')?.addEventListener('click',exportReport);$('clearHistoryBtn')?.addEventListener('click',()=>{if(confirm(window.t('هل تريد حذف سجل الجلسات المحفوظ محليًا؟'))){localStorage.removeItem('antiSleepSessions');loadHistory();showToast('تم حذف سجل الجلسات')}});
 startBtn?.addEventListener('click',()=>{resetSessionMetrics();startSession()},{capture:true});stopBtn?.addEventListener('click',()=>{stopSession(true)},{capture:true});window.addEventListener('antiSleepCameraFailed',()=>stopSession(false));window.addEventListener('antiSleepCameraStopped',()=>{if(sessionActive)stopSession(true)});window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);
 loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterval(tick,250);window.addEventListener('beforeunload',()=>{if(sessionActive)stopSession(true);clearInterval(sampleHandle)});
 })();
@@ -2727,8 +2909,8 @@ loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterva
     function formatCloudMinutes(seconds){
         const total=Math.max(0,Math.round(Number(seconds)||0));
         const h=Math.floor(total/3600), m=Math.floor((total%3600)/60);
-        if(h>0)return h+'س '+m+'د';
-        return m+'د';
+        if(h>0)return h+' '+(window.getAntiSleepLanguage?.()==='fr'?'h':window.getAntiSleepLanguage?.()==='en'?'h':'س')+' '+m+' '+(window.getAntiSleepLanguage?.()==='ar'?'د':window.getAntiSleepLanguage?.()==='fr'?'min':'min');
+        return m+' '+(window.getAntiSleepLanguage?.()==='ar'?'د':'min');
     }
     function renderCloudStats(stats){
         if(cloudSessionCount)cloudSessionCount.textContent=String(stats?.sessionCount||0);
@@ -2776,7 +2958,7 @@ loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterva
     });
     deleteCloudDataBtn?.addEventListener('click',async()=>{
         if(!currentUser)return;
-        if(!confirm('سيتم حذف سجل جلسات المراقبة والإحصائيات من MongoDB نهائيًا. هل تريد المتابعة؟'))return;
+        if(!confirm(window.t('سيتم حذف سجل جلسات المراقبة والإحصائيات من MongoDB نهائيًا. هل تريد المتابعة؟')))return;
         deleteCloudDataBtn.disabled=true;
         try{
             await api('/api/data/sessions',{method:'DELETE'});
@@ -2844,9 +3026,6 @@ loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterva
     sync();
 })();
 </script>
-
-<script src="./i18n.js"></script>
-<script src="./platform.js"></script>
 
 <script>
 window.__antiSleepPwaRegistration=true;
