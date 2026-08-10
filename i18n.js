@@ -367,10 +367,21 @@
 
   function updateDirection(lang) {
     const rtl = lang === 'ar';
+    const direction = rtl ? 'rtl' : 'ltr';
     document.documentElement.lang = lang;
-    document.documentElement.dir = rtl ? 'rtl' : 'ltr';
-    document.body?.classList.toggle('language-rtl', rtl);
-    document.body?.classList.toggle('language-ltr', !rtl);
+    document.documentElement.dir = direction;
+    // The stable UI contains legacy RTL CSS rules. Inline !important values
+    // make the language switch authoritative without touching the detection core.
+    document.documentElement.style.setProperty('direction', direction, 'important');
+    if (document.body) {
+      document.body.dir = direction;
+      document.body.style.setProperty('direction', direction, 'important');
+      document.body.style.setProperty('text-align', rtl ? 'right' : 'left', 'important');
+      document.body.classList.toggle('language-rtl', rtl);
+      document.body.classList.toggle('language-ltr', !rtl);
+    }
+    const app = document.querySelector('.app');
+    if (app) app.style.setProperty('direction', direction, 'important');
   }
 
   function updateLanguageButtons(lang) {
