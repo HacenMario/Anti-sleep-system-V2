@@ -1,4 +1,4 @@
-const CACHE_NAME = 'anti-sleep-v2-platform-v2';
+const CACHE_NAME = 'anti-sleep-v2-platform-v3';
 const APP_SHELL = [
   './',
   './index.html',
