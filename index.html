@@ -1576,7 +1576,156 @@ html[dir="rtl"] .app {
     direction: rtl;
 }
 
+
+/* ============================================================
+   V2 ADDITIVE UX FEATURES
+   Theme, advanced history, session summary, calibration UI,
+   and multi-level alert presentation.
+   IMPORTANT: these styles do not modify detection logic.
+   ============================================================ */
+html.theme-light {
+    --bg-primary:#eef3f9;
+    --bg-card:#ffffff;
+    --bg-card-2:#f4f7fb;
+    --border-color:#cbd5e1;
+    --text-primary:#172033;
+    --text-secondary:#52627a;
+    --accent-blue:#2563eb;
+    --accent-cyan:#0891b2;
+    --accent-rose:#e11d48;
+    --accent-amber:#d97706;
+    --accent-green:#059669;
+    --shadow-glow:0 0 30px rgba(37,99,235,.10);
+}
+html.theme-light body{
+    background-color:var(--bg-primary);
+    background-image:radial-gradient(ellipse at 20% 50%,#dbeafe 0%,transparent 60%),
+                     radial-gradient(ellipse at 80% 50%,#e0f2fe 0%,transparent 60%);
+}
+html.theme-light .app{box-shadow:var(--shadow-glow),0 20px 60px rgba(15,23,42,.12)}
+html.theme-light .pro-card,
+html.theme-light .history-item,
+html.theme-light .telemetry-item,
+html.theme-light .alert-box,
+html.theme-light .platform-box{
+    background:rgba(255,255,255,.78);
+}
+html.theme-light .tool-btn,
+html.theme-light .small-btn,
+html.theme-light .language-switcher{
+    background:rgba(255,255,255,.82);
+}
+html.theme-light .status-panel,
+html.theme-light .settings-row{
+    background:rgba(255,255,255,.72);
+}
+.theme-toggle-btn{
+    min-width:42px!important;
+    justify-content:center;
+    font-size:.9rem!important;
+}
+.advanced-history-tools{
+    display:grid;
+    grid-template-columns:minmax(160px,1.5fr) repeat(3,minmax(105px,1fr)) auto;
+    gap:7px;
+    margin:0 0 10px;
+}
+.advanced-history-tools input,
+.advanced-history-tools select{
+    min-width:0;
+    width:100%;
+    border:1px solid var(--line-soft);
+    background:rgba(8,12,24,.25);
+    color:var(--text-primary);
+    border-radius:9px;
+    padding:8px 9px;
+    font-size:.65rem;
+    outline:none;
+}
+html.theme-light .advanced-history-tools input,
+html.theme-light .advanced-history-tools select{background:rgba(255,255,255,.9)}
+.advanced-history-tools input:focus,
+.advanced-history-tools select:focus{border-color:var(--accent-blue);box-shadow:0 0 0 2px rgba(59,130,246,.10)}
+.history-count-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:28px;padding:4px 7px;border-radius:999px;
+    background:rgba(59,130,246,.12);color:var(--accent-blue);
+    font-size:.58rem;font-weight:900;
+}
+.history-item{cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease}
+.history-item:hover{transform:translateY(-1px);border-color:rgba(59,130,246,.28)}
+.history-item .history-risk{font-weight:900}
+.history-item .history-meta{font-size:.58rem}
+.history-empty-filter{padding:18px;text-align:center;color:var(--text-secondary);font-size:.68rem}
+.feature-modal{
+    position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;
+    padding:16px;background:rgba(2,6,23,.70);backdrop-filter:blur(8px);
+}
+.feature-modal.show{display:flex}
+.feature-modal-card{
+    width:min(620px,100%);max-height:min(88vh,760px);overflow:auto;
+    background:var(--bg-card);color:var(--text-primary);
+    border:1px solid var(--border-color);border-radius:20px;
+    box-shadow:0 24px 80px rgba(0,0,0,.35);padding:18px;
+}
+.feature-modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.feature-modal-title{font-size:1rem;font-weight:900}
+.feature-modal-close{border:0;background:rgba(148,163,200,.12);color:var(--text-primary);width:34px;height:34px;border-radius:10px;cursor:pointer;font-size:1.2rem}
+.summary-hero{
+    display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+    padding:14px;border-radius:15px;background:linear-gradient(135deg,rgba(59,130,246,.10),rgba(34,211,238,.06));
+    border:1px solid rgba(96,165,250,.18);margin-bottom:12px;
+}
+.summary-status{font-size:1.05rem;font-weight:950}
+.summary-score{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;font-weight:950;font-size:1.1rem;border:7px solid rgba(148,163,200,.15)}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.summary-metric{padding:10px;border-radius:11px;background:rgba(148,163,200,.08);border:1px solid rgba(148,163,200,.08)}
+.summary-metric small{display:block;color:var(--text-secondary);font-size:.56rem}
+.summary-metric strong{display:block;margin-top:4px;font-size:.82rem}
+.summary-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.calibration-advanced{
+    margin-top:9px;padding:10px;border-radius:12px;
+    border:1px solid rgba(34,211,238,.14);
+    background:rgba(34,211,238,.035);
+}
+.calibration-advanced-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.calibration-advanced-item small{display:block;color:var(--text-secondary);font-size:.52rem}
+.calibration-advanced-item strong{display:block;margin-top:3px;font-size:.7rem}
+.calibration-quality-bar{height:5px;border-radius:999px;background:rgba(148,163,200,.12);overflow:hidden;margin-top:8px}
+.calibration-quality-bar i{display:block;height:100%;width:0;background:var(--accent-cyan);transition:width .25s ease}
+.alarm-level-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-width:76px;padding:4px 8px;border-radius:999px;
+    font-size:.58rem;font-weight:950;letter-spacing:.3px;
+}
+.alarm-level-badge.level-1{background:rgba(245,158,11,.15);color:#fbbf24}
+.alarm-level-badge.level-2{background:rgba(249,115,22,.16);color:#fb923c}
+.alarm-level-badge.level-3{background:rgba(244,63,94,.18);color:#fb7185}
+html.theme-light .alarm-level-badge.level-1{color:#b45309}
+html.theme-light .alarm-level-badge.level-2{color:#c2410c}
+html.theme-light .alarm-level-badge.level-3{color:#be123c}
+@media(max-width:760px){
+    .advanced-history-tools{grid-template-columns:1fr 1fr}
+    .advanced-history-tools input{grid-column:1/-1}
+    .calibration-advanced-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:430px){
+    .summary-grid{grid-template-columns:1fr 1fr}
+    .summary-hero{grid-template-columns:1fr}
+    .summary-score{width:64px;height:64px}
+}
+
 </style>
+
+<script>
+(function(){
+  try{
+    const theme=localStorage.getItem('antiSleepTheme')||'dark';
+    if(theme==='light') document.documentElement.classList.add('theme-light');
+  }catch(e){}
+})();
+</script>
+
 </head>
 <body>
 
@@ -1620,6 +1769,7 @@ html[dir="rtl"] .app {
                         <span id="authUserName">حساب</span>
                     </span>
                 </div>
+                <button class="tool-btn theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="تبديل المظهر">🌙</button>
                 <button class="tool-btn" id="compactBtn" type="button">▦ واجهة مختصرة</button>
                 <button class="tool-btn" id="authAccountBtnToolbar" type="button">👤 حساب</button>
             </div>
@@ -1721,7 +1871,8 @@ html[dir="rtl"] .app {
 
         <!-- ====== ALARM WARNING ====== -->
         <div id="alarmWarning">
-            <span>🔊</span> إنذار! استيقظ فوراً
+            <span>🔊</span> <span id="alarmLevelText">إنذار! استيقظ فوراً</span>
+            <span class="alarm-level-badge level-1" id="alarmLevelBadge">LEVEL 1</span>
             <span style="font-size:0.8rem; opacity:0.7;" id="alarmDurationDisplay"></span>
         </div>
 
@@ -1779,6 +1930,19 @@ html[dir="rtl"] .app {
                         <button class="calibration-btn" id="calibrateBtn" type="button">🎯 معايرة تلقائية</button>
                         <span id="calibrationStatus" class="calibration-status">المعايرة الافتراضية</span>
                         <span id="adaptiveThresholdLabel">عتبة تكيفية: --</span>
+                    </div>
+                    <div class="calibration-advanced" id="advancedCalibrationPanel">
+                        <div class="calibration-advanced-grid">
+                            <div class="calibration-advanced-item"><small>الحالة</small><strong id="advancedCalibrationState">جاهز</strong></div>
+                            <div class="calibration-advanced-item"><small>العينات</small><strong id="advancedCalibrationSamples">0</strong></div>
+                            <div class="calibration-advanced-item"><small>العتبة الحالية</small><strong id="advancedCalibrationThreshold">--</strong></div>
+                            <div class="calibration-advanced-item"><small>آخر معايرة</small><strong id="advancedCalibrationTime">--</strong></div>
+                        </div>
+                        <div class="calibration-quality-bar"><i id="advancedCalibrationQuality"></i></div>
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:7px;">
+                            <span id="advancedCalibrationHint" style="font-size:.56rem;color:var(--text-secondary);">حافظ على فتح العينين وثبات الوجه أثناء المعايرة.</span>
+                            <button class="small-btn" id="advancedCalibrateBtn" type="button">🎯 بدء المعايرة</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1887,7 +2051,30 @@ html[dir="rtl"] .app {
                 <div class="pro-card-title">🕘 سجل الجلسات</div>
                 <div class="pro-card-sub" id="historySourceLabel">محلي على جهازك</div>
             </div>
-            <div class="history-list" id="historyList"><div class="empty-history">لا توجد جلسات محفوظة بعد.</div></div>
+            <div class="advanced-history-tools" id="advancedHistoryTools">
+    <input id="historySearch" type="search" placeholder="🔎 البحث في الجلسات..." autocomplete="off">
+    <select id="historyRiskFilter" aria-label="فلترة مستوى الخطر">
+        <option value="all">كل المستويات</option>
+        <option value="safe">SAFE</option>
+        <option value="low">LOW</option>
+        <option value="moderate">MODERATE</option>
+        <option value="high">HIGH</option>
+        <option value="critical">CRITICAL</option>
+    </select>
+    <select id="historySort" aria-label="ترتيب الجلسات">
+        <option value="newest">الأحدث أولاً</option>
+        <option value="oldest">الأقدم أولاً</option>
+        <option value="risk">أعلى خطر</option>
+        <option value="duration">أطول جلسة</option>
+        <option value="alerts">أكثر إنذارات</option>
+    </select>
+    <select id="historyLimit" aria-label="عدد الجلسات">
+        <option value="12">12 جلسة</option>
+        <option value="30" selected>30 جلسة</option>
+    </select>
+    <span class="history-count-badge" id="historyCountBadge">0</span>
+</div>
+<div class="history-list" id="historyList"><div class="empty-history">لا توجد جلسات محفوظة بعد.</div></div>
         </section>
 
         <!-- ====== ACCOUNT DATA DASHBOARD ====== -->
@@ -2103,6 +2290,18 @@ html[dir="rtl"] .app {
                 calibrationActive=false;
                 document.body.classList.remove('calibration-active');
                 telemetry.adaptiveThreshold=adaptiveThreshold;
+                try{
+                    localStorage.setItem('antiSleepLastCalibration',JSON.stringify({
+                        threshold: Number(adaptiveThreshold)||null,
+                        samples: calibrationSamples.length,
+                        completedAt: new Date().toISOString()
+                    }));
+                }catch(e){}
+                window.dispatchEvent(new CustomEvent('antiSleepCalibrationComplete',{detail:{
+                    threshold:adaptiveThreshold,
+                    samples:calibrationSamples.length,
+                    completedAt:new Date().toISOString()
+                }}));
             }
 
             function resetDetectionProfile(){
@@ -2130,6 +2329,17 @@ html[dir="rtl"] .app {
                 if(alarmLevel>=2) document.body.classList.add('alarm-level-2');
                 if(alarmLevel>=3) document.body.classList.add('alarm-level-3');
                 telemetry.alarmLevel=alarmLevel;
+                const levelBadge=document.getElementById('alarmLevelBadge');
+                const levelText=document.getElementById('alarmLevelText');
+                if(levelBadge){
+                    levelBadge.className='alarm-level-badge level-'+alarmLevel;
+                    levelBadge.textContent='LEVEL '+alarmLevel;
+                }
+                if(levelText){
+                    const messages={1:['⚠️ انتبه!','⚠️ Attention!','⚠️ Attention !'],2:['🟠 نعاس مرتفع!','🟠 High drowsiness!','🟠 Somnolence élevée !'],3:['🔴 خطر حرج! استيقظ فوراً','🔴 Critical danger! Wake up now','🔴 Danger critique ! Réveillez-vous immédiatement']};
+                    const lang=window.getAntiSleepLanguage?window.getAntiSleepLanguage():'ar';
+                    levelText.textContent=(messages[alarmLevel]||messages[1])[lang==='fr'?2:lang==='en'?1:0];
+                }
                 if(oscillator){
                     const frequencies={1:880,2:1040,3:1320};
                     oscillator.frequency.setTargetAtTime(frequencies[alarmLevel],audioCtx.currentTime,0.03);
@@ -2168,6 +2378,8 @@ html[dir="rtl"] .app {
                 alarmWarning.classList.remove('show');
                 statusPanel.classList.remove('alarm-active');
                 document.body.classList.remove('alarm-level-2','alarm-level-3');
+                const levelBadge=document.getElementById('alarmLevelBadge');if(levelBadge){levelBadge.className='alarm-level-badge level-1';levelBadge.textContent='LEVEL 1';}
+                const levelText=document.getElementById('alarmLevelText');if(levelText){const lang=window.getAntiSleepLanguage?window.getAntiSleepLanguage():'ar';levelText.textContent=lang==='fr'?'Alarme ! Réveillez-vous immédiatement':lang==='en'?'Alarm! Wake up now':'إنذار! استيقظ فوراً';}
                 alarmLevel=0;telemetry.alarmLevel=0;
                 const overlay=document.getElementById('drowsinessWarningOverlay');
                 if(overlay){overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');}
@@ -2270,6 +2482,7 @@ html[dir="rtl"] .app {
 
                     if(calibrationActive&&Number.isFinite(eyes.average)&&eyes.average>0.16){
                         calibrationSamples.push(eyes.average);
+                        window.dispatchEvent(new CustomEvent('antiSleepCalibrationProgress',{detail:{samples:calibrationSamples.length,elapsed:performance.now()-calibrationStartedAt,duration:CALIBRATION_MS}}));
                         if(performance.now()-calibrationStartedAt>=CALIBRATION_MS) finishCalibration();
                     }
 
@@ -2510,15 +2723,16 @@ function updateBlinkRate(now){const current=parseInt($('totalBlinks')?.textConte
 function updateQuality(){const running=statusLabel?.textContent==='تشغيل',hasFace=!!telemetry.faceDetected,ear=Number(telemetry.avgEar);let score=0;if(running)score+=20;if(hasFace)score+=35;if(Number.isFinite(ear))score+=30;if(video&&video.readyState>=2)score+=15;score=Math.min(100,score);const ring=$('qualityRing');if(ring)ring.style.background=`conic-gradient(var(--accent-green) ${score*3.6}deg,rgba(148,163,200,.12) ${score*3.6}deg)`;$('qualityPercent').textContent=score+'%';$('qualityProgress').style.width=score+'%';let label='في انتظار الكاميرا',detail='ابدأ النظام للحصول على تقييم التتبع.';if(score>=85){label='ممتاز';detail='الوجه والعينان قيد التتبع بشكل مستقر.'}else if(score>=55){label='جيد';detail='التتبع يعمل، حافظ على إضاءة ومسافة ثابتة.'}else if(running){label='يحتاج تحسين';detail='ضع الوجه داخل الإطار وتأكد من الإضاءة.'}$('qualityLabel').textContent=label;$('qualityDetail').textContent=detail;setHealth('cameraHealth',running?'متصل':'جاهز',running?'ok':'');setHealth('faceHealth',hasFace?'مكتشف':'انتظار',hasFace?'ok':'warn');setHealth('eyeHealth',Number.isFinite(ear)?'مستقر':'انتظار',Number.isFinite(ear)?'ok':'warn');setHealth('audioHealth',muteBtn?.textContent.includes('مكتوم')?'مكتوم':'جاهز',muteBtn?.textContent.includes('مكتوم')?'warn':'ok');}
 function tick(){updateSessionTimer();const now=performance.now(),ear=Number(telemetry.avgEar);if(Number.isFinite(ear))addEarSample(ear);updateRisk(now);updateBlinkRate(now);updateQuality();fpsFrames++;if(now-fpsLast>=1000){fps=fpsFrames;fpsFrames=0;fpsLast=now;$('fpsValue').textContent=fps+' FPS';}const alarming=!!alarmWarning?.classList.contains('show');if(alarming&&!lastAlarmState){sessionAlarmCount++;lastAlarmStart=Date.now();lastAlertText=formatDateTime();$('lastAlert').textContent=lastAlertText;$('sessionAlerts').textContent=sessionAlarmCount;}if(!alarming&&lastAlarmState&&lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';}lastAlarmState=alarming;}
 function startSession(){if(sessionActive)return;sessionStart=Date.now();sessionActive=true;showToast('تم بدء جلسة المراقبة');}
-function stopSession(save=true){if(!sessionActive&&!sessionStart)return;sessionElapsedBeforePause=sessionSeconds();sessionActive=false;sessionStart=null;if(lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;}$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';if(save&&sessionElapsedBeforePause>=1)saveSession();showToast('تم إنهاء جلسة المراقبة');}
+function stopSession(save=true){if(!sessionActive&&!sessionStart)return;sessionElapsedBeforePause=sessionSeconds();sessionActive=false;sessionStart=null;if(lastAlarmStart){sessionAlertSeconds+=(Date.now()-lastAlarmStart)/1000;lastAlarmStart=null;}$('totalAlertTime').textContent=sessionAlertSeconds.toFixed(1)+' ث';let savedItem=null;if(save&&sessionElapsedBeforePause>=1){savedItem=saveSession();if(typeof window.__antiSleepShowSessionSummary==='function')window.__antiSleepShowSessionSummary(savedItem||{date:formatDateTime(),duration:Math.round(sessionElapsedBeforePause),alerts:sessionAlarmCount,alertSeconds:Number(sessionAlertSeconds.toFixed(1)),avgEar:earSamples?(earSum/earSamples).toFixed(3):'--',minEar:minEar===Infinity?'--':minEar.toFixed(3),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)});}showToast('تم إنهاء جلسة المراقبة');}
 function resetSessionMetrics(){sessionStart=null;sessionElapsedBeforePause=0;sessionActive=false;sessionAlarmCount=0;sessionAlertSeconds=0;lastAlarmStart=null;lastAlarmState=false;earData.length=0;perclosSamples=[];blinkWindow=[];minEar=Infinity;earSum=0;earSamples=0;lastBlinkCount=0;telemetry.perclos=0;telemetry.riskScore=0;$('sessionAlerts').textContent='0';$('lastAlert').textContent='--';$('totalAlertTime').textContent='0.0 ث';$('riskScore').textContent='0';$('riskPerclos').textContent='0%';updateSessionTimer();drawChart();}
 window.loadHistory=function loadHistory(){let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}const box=$('historyList');if(!box)return;if(!list.length){box.innerHTML='<div class="empty-history">لا توجد جلسات محفوظة بعد.</div>';return;}box.innerHTML=list.slice(0,12).map(x=>`<div class="history-item"><strong>${x.date}</strong><span>${formatTime(x.duration)}</span><span>🚨 ${x.alerts} • EAR ${x.avgEar||'--'} • Risk ${x.riskScore??'--'}</span></div>`).join('');}
-function saveSession(){const avg=earSamples?(earSum/earSamples).toFixed(3):'--',item={date:formatDateTime(),duration:Math.round(sessionElapsedBeforePause),alerts:sessionAlarmCount,alertSeconds:Number(sessionAlertSeconds.toFixed(1)),avgEar:avg,minEar:minEar===Infinity?'--':minEar.toFixed(3),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)};let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}list.unshift(item);localStorage.setItem('antiSleepSessions',JSON.stringify(list.slice(0,30)));loadHistory();if(typeof window.__antiSleepSaveRemoteSession==='function'){window.__antiSleepSaveRemoteSession({durationSeconds:Math.max(1,Math.round(sessionElapsedBeforePause)),alertCount:Math.max(0,Math.round(sessionAlarmCount)),alertSeconds:Math.max(0,Number(sessionAlertSeconds.toFixed(1))),completed:true,avgEar:Number.isFinite(Number(avg))?Number(avg):null,minEar:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)});}}
+function saveSession(){const avg=earSamples?(earSum/earSamples).toFixed(3):'--',item={date:formatDateTime(),duration:Math.round(sessionElapsedBeforePause),alerts:sessionAlarmCount,alertSeconds:Number(sessionAlertSeconds.toFixed(1)),avgEar:avg,minEar:minEar===Infinity?'--':minEar.toFixed(3),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)};let list=[];try{list=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]')}catch(e){}list.unshift(item);localStorage.setItem('antiSleepSessions',JSON.stringify(list.slice(0,30)));loadHistory();if(typeof window.__antiSleepSaveRemoteSession==='function'){window.__antiSleepSaveRemoteSession({durationSeconds:Math.max(1,Math.round(sessionElapsedBeforePause)),alertCount:Math.max(0,Math.round(sessionAlarmCount)),alertSeconds:Math.max(0,Number(sessionAlertSeconds.toFixed(1))),completed:true,avgEar:Number.isFinite(Number(avg))?Number(avg):null,minEar:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0)});}return item;}
 function exportReport(){const report={application:'Anti Sleep System by MADOUNINE HACENE',version:'2.0',exportedAt:formatDateTime(),sessionDurationSeconds:Math.round(sessionSeconds()),sessionDuration:formatTime(sessionSeconds()),sessionAlerts:sessionAlarmCount,totalAlertSeconds:Number(sessionAlertSeconds.toFixed(1)),totalAlarms:parseInt(alarmCountEl?.textContent||'0',10)||0,averageEAR:earSamples?(earSum/earSamples).toFixed(3):null,minimumEAR:minEar===Infinity?null:Number(minEar.toFixed(3)),perclos:Number((telemetry.perclos||0).toFixed(1)),riskScore:Number(telemetry.riskScore||0),blinkRate:Number(telemetry.blinkRate||0),approximateFPS:fps||null,privacy:'Processed locally in the browser; only aggregated session summaries may be synced.'};const blob=new Blob([JSON.stringify(report,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='anti-sleep-session-report.json';a.click();URL.revokeObjectURL(a.href);showToast('تم تصدير تقرير الجلسة');}
 function updateNetwork(){const b=$('networkBadge');if(!b)return;if(navigator.onLine){b.textContent='● متصل';b.classList.remove('offline')}else{b.textContent='● وضع عدم الاتصال';b.classList.add('offline')}}
 function updateSW(){if(!('serviceWorker'in navigator)){setHealth('swHealth','غير مدعوم','bad');setHealth('offlineHealth','غير متاح','bad');return;}navigator.serviceWorker.register('./sw.js').then(()=>navigator.serviceWorker.ready).then(()=>{setHealth('swHealth','نشط','ok');setHealth('offlineHealth','جاهز','ok')}).catch(()=>{setHealth('swHealth','خطأ','bad');setHealth('offlineHealth','غير مؤكد','warn')});}
 window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;$('installBtn')?.classList.add('install-btn','show')});$('installBtn')?.addEventListener('click',async()=>{if(!deferredInstallPrompt){showToast('التطبيق مثبت أو التثبيت غير متاح حاليًا');return;}deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;$('installBtn')?.classList.remove('show')});window.addEventListener('appinstalled',()=>{showToast('تم تثبيت Anti Sleep System بنجاح');$('installBtn')?.classList.remove('show')});
 $('exportBtn')?.addEventListener('click',exportReport);$('clearHistoryBtn')?.addEventListener('click',()=>{if(confirm('هل تريد حذف سجل الجلسات المحفوظ محليًا؟')){localStorage.removeItem('antiSleepSessions');loadHistory();showToast('تم حذف سجل الجلسات')}});
+document.getElementById('calibrateBtn')?.addEventListener('click',()=>{resetDetectionProfile();beginCalibration();});
 startBtn?.addEventListener('click',()=>{resetSessionMetrics();startSession()},{capture:true});stopBtn?.addEventListener('click',()=>{stopSession(true)},{capture:true});window.addEventListener('antiSleepCameraFailed',()=>stopSession(false));window.addEventListener('antiSleepCameraStopped',()=>{if(sessionActive)stopSession(true)});window.addEventListener('online',updateNetwork);window.addEventListener('offline',updateNetwork);
 loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterval(tick,250);window.addEventListener('beforeunload',()=>{if(sessionActive)stopSession(true);clearInterval(sampleHandle)});
 })();
@@ -2969,5 +3183,334 @@ loadHistory();updateNetwork();updateSW();updateQuality();sampleHandle=setInterva
 window.__antiSleepPwaRegistration=true;
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
+
+<script>
+/* ============================================================
+   V2 ADDITIVE UX FEATURES
+   - Dark / Light theme
+   - Automatic session summary
+   - Advanced session history
+   - Advanced calibration dashboard
+   - Multi-level alert presentation
+   IMPORTANT: no detection thresholds, EAR calculations,
+   MediaPipe flow, camera flow or alarm decision logic is changed.
+   ============================================================ */
+(function(){
+  'use strict';
+
+  const $=id=>document.getElementById(id);
+  const t=(key,fallback)=>window.t?window.t(key,fallback):fallback||key;
+
+  /* ---------- Theme ---------- */
+  const THEME_KEY='antiSleepTheme';
+
+  function currentTheme(){
+    try{return localStorage.getItem(THEME_KEY)==='light'?'light':'dark';}
+    catch(e){return 'dark';}
+  }
+
+  function applyTheme(theme, persist=true){
+    theme=theme==='light'?'light':'dark';
+    document.documentElement.classList.toggle('theme-light',theme==='light');
+    if(persist){
+      try{localStorage.setItem(THEME_KEY,theme);}catch(e){}
+    }
+    const btn=$('themeToggleBtn');
+    if(btn){
+      btn.textContent=theme==='light'?'☀️':'🌙';
+      btn.setAttribute('aria-label',t(
+        theme==='light'?'التبديل إلى الوضع الداكن':'التبديل إلى الوضع الفاتح',
+        theme==='light'?'Switch to dark mode':'Switch to light mode'
+      ));
+      btn.title=btn.getAttribute('aria-label');
+    }
+    const meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute('content',theme==='light'?'#eef3f9':'#080c18');
+  }
+
+  function initTheme(){
+    applyTheme(currentTheme(),false);
+    $('themeToggleBtn')?.addEventListener('click',()=>{
+      applyTheme(currentTheme()==='light'?'dark':'light',true);
+    });
+  }
+
+  /* ---------- Session summary ---------- */
+  let summaryModal=null;
+
+  function riskInfo(score){
+    score=Number(score)||0;
+    if(score>=80)return {key:'حرج',cls:'critical',color:'var(--accent-rose)',icon:'🔴'};
+    if(score>=60)return {key:'مرتفع',cls:'high',color:'var(--accent-amber)',icon:'🟠'};
+    if(score>=40)return {key:'متوسط',cls:'moderate',color:'var(--accent-amber)',icon:'🟡'};
+    if(score>=20)return {key:'منخفض',cls:'low',color:'var(--accent-green)',icon:'🟢'};
+    return {key:'آمن',cls:'safe',color:'var(--accent-green)',icon:'🟢'};
+  }
+
+  function fmtDuration(sec){
+    sec=Math.max(0,Math.round(Number(sec)||0));
+    const h=String(Math.floor(sec/3600)).padStart(2,'0');
+    const m=String(Math.floor((sec%3600)/60)).padStart(2,'0');
+    const s=String(sec%60).padStart(2,'0');
+    return `${h}:${m}:${s}`;
+  }
+
+  function ensureSummaryModal(){
+    if(summaryModal)return summaryModal;
+    summaryModal=document.createElement('div');
+    summaryModal.className='feature-modal';
+    summaryModal.id='sessionSummaryModal';
+    summaryModal.setAttribute('aria-hidden','true');
+    summaryModal.innerHTML=`
+      <div class="feature-modal-card" role="dialog" aria-modal="true" aria-labelledby="sessionSummaryTitle">
+        <div class="feature-modal-head">
+          <div>
+            <div class="feature-modal-title" id="sessionSummaryTitle">📋 ${t('ملخص الجلسة','Session summary')}</div>
+            <div style="font-size:.58rem;color:var(--text-secondary)" id="sessionSummaryDate">--</div>
+          </div>
+          <button class="feature-modal-close" id="sessionSummaryClose" type="button" aria-label="${t('إغلاق','Close')}">×</button>
+        </div>
+        <div class="summary-hero">
+          <div>
+            <div class="summary-status" id="summaryStatus">🟢 ${t('جلسة مستقرة','Stable session')}</div>
+            <div style="font-size:.62rem;color:var(--text-secondary);margin-top:5px" id="summaryMessage">${t('تم إنهاء الجلسة وحفظ ملخصها.','The session ended and its summary was saved.')}</div>
+          </div>
+          <div class="summary-score" id="summaryScore">0</div>
+        </div>
+        <div class="summary-grid">
+          <div class="summary-metric"><small>${t('المدة','Duration')}</small><strong id="summaryDuration">00:00:00</strong></div>
+          <div class="summary-metric"><small>${t('الإنذارات','Alarms')}</small><strong id="summaryAlerts">0</strong></div>
+          <div class="summary-metric"><small>${t('زمن الإنذار','Alarm time')}</small><strong id="summaryAlertTime">0.0s</strong></div>
+          <div class="summary-metric"><small>EAR</small><strong id="summaryAvgEar">--</strong></div>
+          <div class="summary-metric"><small>${t('أدنى EAR','Minimum EAR')}</small><strong id="summaryMinEar">--</strong></div>
+          <div class="summary-metric"><small>PERCLOS</small><strong id="summaryPerclos">0%</strong></div>
+        </div>
+        <div class="summary-actions">
+          <button class="small-btn" id="summaryExportBtn" type="button">📥 ${t('تصدير التقرير','Export report')}</button>
+          <button class="small-btn" id="summaryHistoryBtn" type="button">🔎 ${t('عرض السجل','View history')}</button>
+          <button class="small-btn" id="summaryCloseBtn" type="button">✓ ${t('إغلاق','Close')}</button>
+        </div>
+      </div>`;
+    document.body.appendChild(summaryModal);
+
+    const close=()=>{summaryModal.classList.remove('show');summaryModal.setAttribute('aria-hidden','true');};
+    $('sessionSummaryClose')?.addEventListener('click',close);
+    $('summaryCloseBtn')?.addEventListener('click',close);
+    $('summaryHistoryBtn')?.addEventListener('click',()=>{close();$('historySearch')?.focus();});
+    summaryModal.addEventListener('click',e=>{if(e.target===summaryModal)close();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&summaryModal?.classList.contains('show'))close();});
+    $('summaryExportBtn')?.addEventListener('click',()=>{
+      if(typeof window.__antiSleepExportCurrentReport==='function')window.__antiSleepExportCurrentReport();
+      else $('exportBtn')?.click();
+    });
+    return summaryModal;
+  }
+
+  function showSessionSummary(item){
+    if(!item)return;
+    const modal=ensureSummaryModal();
+    const score=Number(item.riskScore)||0;
+    const info=riskInfo(score);
+    $('summaryStatus').textContent=`${info.icon} ${t(info.key,info.key)}`;
+    $('summaryStatus').style.color=info.color;
+    $('summaryScore').textContent=score;
+    $('summaryScore').style.borderColor=info.color;
+    $('summaryDate').textContent='';
+    $('sessionSummaryDate').textContent=String(item.date||'--');
+    $('summaryDuration').textContent=fmtDuration(item.duration);
+    $('summaryAlerts').textContent=String(item.alerts??0);
+    $('summaryAlertTime').textContent=`${Number(item.alertSeconds||0).toFixed(1)}s`;
+    $('summaryAvgEar').textContent=item.avgEar??'--';
+    $('summaryMinEar').textContent=item.minEar??'--';
+    $('summaryPerclos').textContent=`${Number(item.perclos||0).toFixed(1)}%`;
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden','false');
+  }
+
+  window.__antiSleepShowSessionSummary=showSessionSummary;
+
+  /* ---------- Advanced history ---------- */
+  let historyData=[];
+  let historyReady=false;
+
+  function readHistory(){
+    try{
+      const data=JSON.parse(localStorage.getItem('antiSleepSessions')||'[]');
+      return Array.isArray(data)?data:[];
+    }catch(e){return [];}
+  }
+
+  function historyRisk(score){
+    score=Number(score)||0;
+    if(score>=80)return 'critical';
+    if(score>=60)return 'high';
+    if(score>=40)return 'moderate';
+    if(score>=20)return 'low';
+    return 'safe';
+  }
+
+  function renderAdvancedHistory(){
+    const box=$('historyList');
+    if(!box)return;
+
+    historyData=readHistory();
+    const search=String($('historySearch')?.value||'').trim().toLowerCase();
+    const risk=$('historyRiskFilter')?.value||'all';
+    const sort=$('historySort')?.value||'newest';
+    const limit=Math.max(1,Number($('historyLimit')?.value||30));
+
+    let list=historyData.filter(item=>{
+      const text=[
+        item.date,item.duration,item.alerts,item.alertSeconds,
+        item.avgEar,item.minEar,item.perclos,item.riskScore
+      ].join(' ').toLowerCase();
+      const matchesSearch=!search||text.includes(search);
+      const matchesRisk=risk==='all'||historyRisk(item.riskScore)===risk;
+      return matchesSearch&&matchesRisk;
+    });
+
+    list.sort((a,b)=>{
+      if(sort==='oldest')return new Date(a.date)-new Date(b.date);
+      if(sort==='risk')return (Number(b.riskScore)||0)-(Number(a.riskScore)||0);
+      if(sort==='duration')return (Number(b.duration)||0)-(Number(a.duration)||0);
+      if(sort==='alerts')return (Number(b.alerts)||0)-(Number(a.alerts)||0);
+      return new Date(b.date)-new Date(a.date);
+    });
+
+    const visible=list.slice(0,limit);
+    if($('historyCountBadge'))$('historyCountBadge').textContent=String(list.length);
+
+    if(!visible.length){
+      box.innerHTML=`<div class="history-empty-filter">${t(
+        historyData.length?'لا توجد جلسات تطابق الفلترة.':'لا توجد جلسات محفوظة بعد.',
+        historyData.length?'No sessions match the current filters.':'No saved sessions yet.'
+      )}</div>`;
+      return;
+    }
+
+    box.innerHTML=visible.map((x,index)=>{
+      const score=Number(x.riskScore)||0;
+      const riskName=historyRisk(score);
+      const riskText={safe:'SAFE',low:'LOW',moderate:'MODERATE',high:'HIGH',critical:'CRITICAL'}[riskName];
+      return `<div class="history-item" data-history-index="${historyData.indexOf(x)}" tabindex="0" role="button">
+        <strong>${escapeHtml(x.date||'--')}</strong>
+        <span>${fmtDuration(x.duration)}</span>
+        <span class="history-meta">🚨 ${Number(x.alerts)||0} • EAR ${escapeHtml(x.avgEar??'--')} • <span class="history-risk">${riskText} ${score}</span></span>
+      </div>`;
+    }).join('');
+
+    box.querySelectorAll('[data-history-index]').forEach(el=>{
+      const open=()=>{
+        const item=historyData[Number(el.dataset.historyIndex)];
+        if(item)showSessionSummary(item);
+      };
+      el.addEventListener('click',open);
+      el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+    });
+  }
+
+  function escapeHtml(value){
+    return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  }
+
+  function initAdvancedHistory(){
+    ['historySearch','historyRiskFilter','historySort','historyLimit'].forEach(id=>{
+      $(id)?.addEventListener('input',renderAdvancedHistory);
+      $(id)?.addEventListener('change',renderAdvancedHistory);
+    });
+
+    const clear=$('clearHistoryBtn');
+    clear?.addEventListener('click',()=>setTimeout(renderAdvancedHistory,30));
+
+    renderAdvancedHistory();
+    historyReady=true;
+  }
+
+  /* ---------- Advanced calibration dashboard ---------- */
+  function updateCalibrationPanel(detail){
+    const state=$('advancedCalibrationState');
+    const samples=$('advancedCalibrationSamples');
+    const threshold=$('advancedCalibrationThreshold');
+    const time=$('advancedCalibrationTime');
+    const quality=$('advancedCalibrationQuality');
+    const hint=$('advancedCalibrationHint');
+    if(!state)return;
+
+    const status=String($('calibrationStatus')?.textContent||'');
+    const telemetry=window.__antiSleepTelemetry||{};
+    const thresholdValue=Number(telemetry.adaptiveThreshold);
+
+    if(detail){
+      state.textContent=t('تمت المعايرة','Calibration complete');
+      samples.textContent=String(detail.samples??0);
+      threshold.textContent=Number.isFinite(Number(detail.threshold))?Number(detail.threshold).toFixed(3):'--';
+      time.textContent=new Date(detail.completedAt||Date.now()).toLocaleTimeString();
+      quality.style.width=Math.min(100,Math.max(0,Number(detail.samples||0)/40*100))+'%';
+      hint.textContent=t('تم حفظ نتيجة المعايرة محلياً للاطلاع فقط.','The calibration result was saved locally for reference only.');
+      return;
+    }
+
+    if(status.includes('جاري')||/calibrat/i.test(status)){
+      state.textContent=t('جاري المعايرة','Calibrating');
+      quality.style.width='50%';
+    }else if(Number.isFinite(thresholdValue)){
+      state.textContent=t('معايرة نشطة','Adaptive profile active');
+      samples.textContent=samples.textContent==='0'?'--':samples.textContent;
+      threshold.textContent=thresholdValue.toFixed(3);
+      quality.style.width='100%';
+    }else{
+      let saved=null;
+      try{saved=JSON.parse(localStorage.getItem('antiSleepLastCalibration')||'null');}catch(e){}
+      if(saved){
+        state.textContent=t('آخر معايرة','Last calibration');
+        samples.textContent=String(saved.samples??0);
+        threshold.textContent=Number(saved.threshold).toFixed(3);
+        time.textContent=new Date(saved.completedAt||Date.now()).toLocaleTimeString();
+        quality.style.width=Math.min(100,Math.max(0,Number(saved.samples||0)/40*100))+'%';
+      }else{
+        state.textContent=t('جاهز','Ready');
+        samples.textContent='0';
+        threshold.textContent='--';
+        time.textContent='--';
+        quality.style.width='0%';
+      }
+    }
+  }
+
+  function initAdvancedCalibration(){
+    $('advancedCalibrateBtn')?.addEventListener('click',()=>{
+      $('calibrateBtn')?.click();
+    });
+    window.addEventListener('antiSleepCalibrationProgress',e=>{const d=e.detail||{};if($('advancedCalibrationState'))$('advancedCalibrationState').textContent=t('جاري المعايرة','Calibrating');if($('advancedCalibrationSamples'))$('advancedCalibrationSamples').textContent=String(d.samples||0);if($('advancedCalibrationQuality'))$('advancedCalibrationQuality').style.width=Math.min(100,Math.max(0,(Number(d.elapsed||0)/Math.max(1,Number(d.duration||8000)))*100))+'%';});
+    window.addEventListener('antiSleepCalibrationComplete',e=>updateCalibrationPanel(e.detail));
+    setInterval(()=>updateCalibrationPanel(),1000);
+    updateCalibrationPanel();
+  }
+
+  /* ---------- Language synchronization ---------- */
+  function refreshFeatureText(){
+    applyTheme(currentTheme(),false);
+    renderAdvancedHistory();
+    updateCalibrationPanel();
+  }
+
+  function init(){
+    initTheme();
+    ensureSummaryModal();
+    initAdvancedHistory();
+    initAdvancedCalibration();
+    refreshFeatureText();
+  }
+
+  window.addEventListener('antiSleepLanguageChanged',refreshFeatureText);
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',init,{once:true});
+  }else{
+    init();
+  }
+})();
+</script>
+
 </body>
 </html>
